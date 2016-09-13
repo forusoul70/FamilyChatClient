@@ -16,6 +16,13 @@ class ConversationTableController: UITableViewController {
     
     private func loadConversationList() {
         self.conversationList = CoreDataHelper.getMessageByAddress("test")
+
+        do {
+            try conversationList?.performFetch()
+        } catch{
+            abort()
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -37,7 +44,9 @@ class ConversationTableController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.conversationList?.sections?.count ?? 0
+        let count = self.conversationList?.sections?.count ?? 0
+        print("Count \(count)")
+        return count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,8 +59,8 @@ class ConversationTableController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellId, forIndexPath: indexPath)
         
-        cell.textLabel?.text = message?.valueForKey("name")?.description
-        cell.detailTextLabel?.text = message?.valueForKey("address")?.description
+        cell.textLabel?.text = message?.valueForKey("address")?.description
+        cell.detailTextLabel?.text = message?.valueForKey("body")?.description
         
         return cell
     }

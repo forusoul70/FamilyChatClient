@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "0ED91B68503DEA24B4238ADCBE985859EA84F225",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "D31EADB544D530818D20A1D6077E74EFA7BD0959" : 0,
+    "0ED91B68503DEA24B4238ADCBE985859EA84F225" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B0DB4B84-BF4A-4592-A90B-5D81D97AEBB5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D31EADB544D530818D20A1D6077E74EFA7BD0959" : "..",
+    "0ED91B68503DEA24B4238ADCBE985859EA84F225" : "FamilyChatClient\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "FamilyChat",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "FamilyChat.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/forusoul70\/FamilyChatClient",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0ED91B68503DEA24B4238ADCBE985859EA84F225"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/forusoul70\/core_data_study.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D31EADB544D530818D20A1D6077E74EFA7BD0959"
+    }
+  ]
+}

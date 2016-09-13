@@ -25,7 +25,7 @@ class CoreDataHelper: NSObject {
         
         // set the batch size to suitable umber
 //        fetchRequest.fetchBatchSize = 20
-        fetchRequest.predicate = NSPredicate(format: "address=%@", address)
+//        fetchRequest.predicate = NSPredicate(format: "address=%@", address)
         
         // sort
         let sort : NSSortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false)
@@ -37,12 +37,14 @@ class CoreDataHelper: NSObject {
         return aFetchedResultController
     }
     
-    static func insertMessage(message:Message) {
+    static func insertMessage(address: String!, body: String!) {
         let context = self.getManagedObjectContext()
         let entity = NSEntityDescription.entityForName("Message", inManagedObjectContext: context)!
         let newMessage = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
         
-        newMessage.setValue(NSData(), forKey: "timestamp")
+        newMessage.setValue(NSDate(), forKey: "timestamp")
+        newMessage.setValue(address, forKey: "address")
+        newMessage.setValue(body, forKey: "body")
         
         // Save the context
         do {

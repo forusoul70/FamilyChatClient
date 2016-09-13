@@ -29,11 +29,6 @@ class DevMenuController: UIViewController {
             return
         }
         
-        let newMessage: Message = Message()
-        newMessage.body = message
-        newMessage.address = name
-        
-        CoreDataHelper.insertMessage(newMessage)
+        CoreDataHelper.insertMessage(name, body: message)
     }
-    
 }
