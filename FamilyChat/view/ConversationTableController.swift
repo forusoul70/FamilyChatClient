@@ -9,13 +9,14 @@
 import UIKit
 import CoreData
 
-class ConversationTableController: UITableViewController {
+class ConversationTableController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     let cellId : String! = "conversationcell";
     var conversationList : NSFetchedResultsController?
     
     private func loadConversationList() {
-        self.conversationList = CoreDataHelper.getMessageByAddress("test")
+        self.conversationList = CoreDataHelper.getMessageByAddress(CoreDataHelper.getCurrentUserId())
+        self.conversationList?.delegate = self
 
         do {
             try conversationList?.performFetch()
@@ -23,6 +24,14 @@ class ConversationTableController: UITableViewController {
             abort()
         }
         
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.beginUpdates()
+    }
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.endUpdates()
     }
     
     override func viewDidLoad() {
@@ -44,13 +53,13 @@ class ConversationTableController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        let count = self.conversationList?.sections?.count ?? 0
-        print("Count \(count)")
-        return count
+        let count = self.conversationList?.sections?.count
+        return count!
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        let sectionInfo = self.conversationList?.sections![section]
+        return sectionInfo?.numberOfObjects ?? 0
     }
 
     
