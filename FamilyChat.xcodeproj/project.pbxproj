@@ -13,6 +13,8 @@
 		277D63C31D87EE1C00D43ED4 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277D63C11D87EE1C00D43ED4 /* Message+CoreDataProperties.swift */; };
 		277D63C41D87EE1C00D43ED4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277D63C21D87EE1C00D43ED4 /* Message.swift */; };
 		2790D7A91D8468A9002D782B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D7A81D8468A9002D782B /* LoginViewController.swift */; };
+		279BD3AC1D8BA45A00700A64 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279BD3AB1D8BA45A00700A64 /* MessagesTableViewController.swift */; };
+		279BD3AE1D8BA64700700A64 /* CoversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279BD3AD1D8BA64700700A64 /* CoversationModel.swift */; };
 		27A802521D83E4D50003358A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A802511D83E4D50003358A /* AppDelegate.swift */; };
 		27A802571D83E4D50003358A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A802551D83E4D50003358A /* Main.storyboard */; };
 		27A8025A1D83E4D50003358A /* FamilyChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A802581D83E4D50003358A /* FamilyChat.xcdatamodeld */; };
@@ -28,6 +30,8 @@
 		277D63C11D87EE1C00D43ED4 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "database/Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		277D63C21D87EE1C00D43ED4 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = database/Message.swift; sourceTree = "<group>"; };
 		2790D7A81D8468A9002D782B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = view/LoginViewController.swift; sourceTree = "<group>"; };
+		279BD3AB1D8BA45A00700A64 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesTableViewController.swift; path = view/MessagesTableViewController.swift; sourceTree = "<group>"; };
+		279BD3AD1D8BA64700700A64 /* CoversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoversationModel.swift; path = database/CoversationModel.swift; sourceTree = "<group>"; };
 		27A8024E1D83E4D50003358A /* FamilyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A802511D83E4D50003358A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27A802561D83E4D50003358A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 				272A428F1D8500640068FEF0 /* CoreDataHelper.swift */,
 				277D63C11D87EE1C00D43ED4 /* Message+CoreDataProperties.swift */,
 				277D63C21D87EE1C00D43ED4 /* Message.swift */,
+				279BD3AD1D8BA64700700A64 /* CoversationModel.swift */,
 			);
 			name = database;
 			sourceTree = "<group>";
@@ -113,6 +118,7 @@
 				27A8026C1D83EA7A0003358A /* ConversationTableController.swift */,
 				2790D7A81D8468A9002D782B /* LoginViewController.swift */,
 				277D63BC1D87A30300D43ED4 /* DevMenuController.swift */,
+				279BD3AB1D8BA45A00700A64 /* MessagesTableViewController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -191,12 +197,14 @@
 				27A8026D1D83EA7A0003358A /* ConversationTableController.swift in Sources */,
 				272A42901D8500640068FEF0 /* CoreDataHelper.swift in Sources */,
 				277D63BD1D87A30300D43ED4 /* DevMenuController.swift in Sources */,
+				279BD3AE1D8BA64700700A64 /* CoversationModel.swift in Sources */,
 				277D63C41D87EE1C00D43ED4 /* Message.swift in Sources */,
 				27A8025A1D83E4D50003358A /* FamilyChat.xcdatamodeld in Sources */,
 				2790D7A91D8468A9002D782B /* LoginViewController.swift in Sources */,
 				27A802521D83E4D50003358A /* AppDelegate.swift in Sources */,
 				277D63C31D87EE1C00D43ED4 /* Message+CoreDataProperties.swift in Sources */,
 				277D63C01D87A57300D43ED4 /* ValidationUtils.swift in Sources */,
+				279BD3AC1D8BA45A00700A64 /* MessagesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
