@@ -9,14 +9,13 @@
 import UIKit
 import CoreData
 
-class ConversationTableController: UITableViewController, NSFetchedResultsControllerDelegate {
+class ConversationTableController: UITableViewController {
     
     let cellId : String! = "conversationcell";
     var conversationList : NSFetchedResultsController?
     
     private func loadConversationList() {
-        self.conversationList = CoreDataHelper.getMessageByAddress(CoreDataHelper.getCurrentUserId())
-        self.conversationList?.delegate = self
+        self.conversationList = CoreDataHelper.getConversationList()
 
         do {
             try conversationList?.performFetch()
@@ -24,14 +23,6 @@ class ConversationTableController: UITableViewController, NSFetchedResultsContro
             abort()
         }
         
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.beginUpdates()
-    }
-    
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.endUpdates()
     }
     
     override func viewDidLoad() {

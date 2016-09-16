@@ -24,7 +24,6 @@ class CoreDataHelper: NSObject {
         fetchRequest.entity = entity
         
         // set the batch size to suitable umber
-        
         fetchRequest.predicate = NSPredicate(format: "address=%@", address)
         
         // sort
@@ -48,7 +47,20 @@ class CoreDataHelper: NSObject {
         let sort : NSSortDescriptor = NSSortDescriptor(key: "timestamp", ascending: true)
         fetchRequest.sortDescriptors = [sort]
         
-        fetchRequest.fetchBatchSize = 20
+        // group by
+        var expressionDescriptions = [AnyObject]()
+        var expressionDescription:NSExpressionDescription
+        expressionDescriptions.append("address")
+        
+        expressionDescription = NSExpressionDescription()
+        expressionDescription.name = "body"
+        expressionDescription.expression = NSExpression(format: "@max.timestamp")
+        expressionDescription.expressionResultType = .Integer32AttributeType
+        expressionDescriptions.append(expressionDescription)
+        
+        fetchRequest.propertiesToFetch = expressionDescriptions
+        fetchRequest.propertiesToGroupBy = ["address"]
+        fetchRequest.resultType = NSFetchRequestResultType.DictionaryResultType
         
         // Edit the sort key as appropriate
         let aFetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: getManagedObjectContext(), sectionNameKeyPath: nil, cacheName: "getConversationList_\(getCurrentUserId())")

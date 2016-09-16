@@ -30,21 +30,21 @@ class LoginViewController: UIViewController {
      
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if (identifier == "login") {
-            let id = self.idTextField.text;
-            let password = self.passwordTextField.text;
-        
-            // TODO : FIXME
-            if (id == "test" && password == "1234") {
-                return true;
-            }
-        
-            self.checkPassswordInfo.hidden = false;
-            return false;
-        }
-        return true
-    }
+//    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+//        if (identifier == "login") {
+//            let id = self.idTextField.text;
+//            let password = self.passwordTextField.text;
+//        
+//            // TODO : FIXME
+//            if (id == "test" && password == "1234") {
+//                return true;
+//            }
+//        
+//            self.checkPassswordInfo.hidden = false;
+//            return false;
+//        }
+//        return true
+//    }
 
     /*
     // MARK: - Navigation
