@@ -9,12 +9,62 @@
 import UIKit
 import CoreData
 
-class MessagesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class MessagesTableViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var messageTextFeild: UITextField!
     
     private let cellId = "messagecell"
     var conversation:CoversationModel?
     var messageList:NSFetchedResultsController?
+    private let sendingMessageQue:NSOperationQueue = NSOperationQueue()
+    
+    class SendingMessageOperation : NSOperation {
+        let address:String?
+        let body:String?
+        
+        init(address:String?, body:String?) {
+            self.address = address ?? nil
+            self.body = body ?? nil
+        }
+        
+        override func main() {
+            insertNewSendMessage()
+        }
+        
+        private func insertNewSendMessage() {
+            if (ValidationUtils.isValid(body) == false) {
+                return
+            }
+            
+            if (ValidationUtils.isValid(address) == false) {
+                return
+            }
+            
+            CoreDataHelper.insertMessage(address, body:body)
+            print("Message inserted [\(address))][\(body)]")
+        }
+    }
+    
+    @IBAction func onSendButtonClicked(sender: AnyObject) {
+        let message = self.messageTextFeild.text
+        if (ValidationUtils.isValid(message) == false) {
+            return
+        }
+        
+        if (self.conversation == nil) {
+            return
+        }
+        
+        let address = self.conversation?.address
+        if (ValidationUtils.isValid(address) == false) {
+            return
+        }
+        
+        self.sendingMessageQue.addOperation(SendingMessageOperation(address:address, body:message))
+    }
+    
+    
     
     private func loadMessageList() {
         if (self.conversation == nil) {
@@ -32,11 +82,14 @@ class MessagesTableViewController: UITableViewController, NSFetchedResultsContro
     }
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.beginUpdates()
+        print("controllerWillChangeContent called")
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.endUpdates()
+        print("controllerDidChangeContent called")
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.reloadData()
+        }
     }
 
     override func viewDidLoad() {
@@ -48,6 +101,9 @@ class MessagesTableViewController: UITableViewController, NSFetchedResultsContro
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
         loadMessageList()
     }
 
@@ -58,16 +114,16 @@ class MessagesTableViewController: UITableViewController, NSFetchedResultsContro
 
     // MARK: - Table view data sourc
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.messageList?.sections?.count ?? 0;
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionInfo = self.messageList?.sections![section]
         return sectionInfo?.numberOfObjects ?? 0
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let message = self.messageList?.objectAtIndexPath(indexPath)
         
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellId, forIndexPath: indexPath)
