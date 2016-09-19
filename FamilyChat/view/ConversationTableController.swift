@@ -57,9 +57,9 @@ class ConversationTableController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let message = self.conversationList?.objectAtIndexPath(indexPath)
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(self.cellId, forIndexPath: indexPath)
+        let cell:ConversationCell = tableView.dequeueReusableCellWithIdentifier(self.cellId, forIndexPath: indexPath) as! ConversationCell
         
-        cell.textLabel?.text = message?.valueForKey("address")?.description
+        cell.addressLabel.text = message?.valueForKey("address")?.description
         cell.detailTextLabel?.text = message?.valueForKey("body")?.description
         
         return cell
