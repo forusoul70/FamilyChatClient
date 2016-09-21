@@ -124,14 +124,25 @@ class MessagesTableViewController: UIViewController, NSFetchedResultsControllerD
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let message = self.messageList?.objectAtIndexPath(indexPath)
+        let message:Message? = self.messageList?.objectAtIndexPath(indexPath) as? Message
+    
+        let cell:MessageViewCell? = tableView.dequeueReusableCellWithIdentifier(self.cellId, forIndexPath: indexPath) as? MessageViewCell
+    
+        if (message?.inSend?.boolValue ?? false) {
+            cell?.sendText?.text = message?.body
+            cell?.sendDate.text = message?.timestamp?.description
+
+            cell?.sendContainer.hidden = false
+            cell?.receivedContainer.hidden = true
+        } else {
+            cell?.receivedText?.text = message?.body
+            cell?.receivedText.text = message?.timestamp?.description
+            
+            cell?.sendContainer.hidden = true
+            cell?.receivedContainer.hidden = false
+        }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(self.cellId, forIndexPath: indexPath)
-        
-        cell.textLabel?.text = message?.valueForKey("address")?.description
-        cell.detailTextLabel?.text = message?.valueForKey("body")?.description
-        
-        return cell
+        return cell ?? UITableViewCell()
     }
 
     /*
