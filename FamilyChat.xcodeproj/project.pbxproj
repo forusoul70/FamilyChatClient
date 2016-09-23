@@ -15,6 +15,7 @@
 		27958EAC1D9425280083A498 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27958EAA1D9425280083A498 /* Message.swift */; };
 		279BD3AC1D8BA45A00700A64 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279BD3AB1D8BA45A00700A64 /* MessagesTableViewController.swift */; };
 		279BD3AE1D8BA64700700A64 /* CoversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279BD3AD1D8BA64700700A64 /* CoversationModel.swift */; };
+		279C86CE1D94C5B700B9CF7F /* default_profile.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 279C86CD1D94C5B700B9CF7F /* default_profile.jpeg */; };
 		27A802521D83E4D50003358A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A802511D83E4D50003358A /* AppDelegate.swift */; };
 		27A802571D83E4D50003358A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A802551D83E4D50003358A /* Main.storyboard */; };
 		27A8025A1D83E4D50003358A /* FamilyChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A802581D83E4D50003358A /* FamilyChat.xcdatamodeld */; };
@@ -23,7 +24,6 @@
 		27A8026D1D83EA7A0003358A /* ConversationTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A8026C1D83EA7A0003358A /* ConversationTableController.swift */; };
 		27C1C9311D92B6EC00D0BB72 /* MessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C1C9301D92B6EC00D0BB72 /* MessageViewCell.swift */; };
 		27C378A51D9027990023789F /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C378A41D9027990023789F /* ConversationCell.swift */; };
-		27C378A91D90297C0023789F /* image in Resources */ = {isa = PBXBuildFile; fileRef = 27C378A81D90297C0023789F /* image */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +35,7 @@
 		27958EAA1D9425280083A498 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = database/Message.swift; sourceTree = "<group>"; };
 		279BD3AB1D8BA45A00700A64 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesTableViewController.swift; path = view/MessagesTableViewController.swift; sourceTree = "<group>"; };
 		279BD3AD1D8BA64700700A64 /* CoversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoversationModel.swift; path = database/CoversationModel.swift; sourceTree = "<group>"; };
+		279C86CD1D94C5B700B9CF7F /* default_profile.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = default_profile.jpeg; path = resource/image/default_profile.jpeg; sourceTree = "<group>"; };
 		27A8024E1D83E4D50003358A /* FamilyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A802511D83E4D50003358A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27A802561D83E4D50003358A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -45,7 +46,6 @@
 		27A8026C1D83EA7A0003358A /* ConversationTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationTableController.swift; path = view/ConversationTableController.swift; sourceTree = "<group>"; };
 		27C1C9301D92B6EC00D0BB72 /* MessageViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageViewCell.swift; path = view/MessageViewCell.swift; sourceTree = "<group>"; };
 		27C378A41D9027990023789F /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationCell.swift; path = view/ConversationCell.swift; sourceTree = "<group>"; };
-		27C378A81D90297C0023789F /* image */ = {isa = PBXFileReference; lastKnownFileType = folder; name = image; path = resource/image; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +143,7 @@
 		27C378A71D9028DE0023789F /* image */ = {
 			isa = PBXGroup;
 			children = (
-				27C378A81D90297C0023789F /* image */,
+				279C86CD1D94C5B700B9CF7F /* default_profile.jpeg */,
 			);
 			name = image;
 			sourceTree = "<group>";
@@ -207,7 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27A8025F1D83E4D50003358A /* LaunchScreen.storyboard in Resources */,
-				27C378A91D90297C0023789F /* image in Resources */,
+				279C86CE1D94C5B700B9CF7F /* default_profile.jpeg in Resources */,
 				27A8025C1D83E4D50003358A /* Assets.xcassets in Resources */,
 				27A802571D83E4D50003358A /* Main.storyboard in Resources */,
 			);
