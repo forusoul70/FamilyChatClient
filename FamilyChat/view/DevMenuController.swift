@@ -29,6 +29,7 @@ class DevMenuController: UIViewController {
             return
         }
         
-        CoreDataHelper.insertMessage(name, body: message)
+        let insertedItem:Message = CoreDataHelper.insertMessage(name, body: message, isSend: false)
+        insertedItem.isSend = false        
     }
 }

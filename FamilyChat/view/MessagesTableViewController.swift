@@ -41,7 +41,7 @@ class MessagesTableViewController: UIViewController, NSFetchedResultsControllerD
                 return
             }
             
-            CoreDataHelper.insertMessage(address, body:body)
+            CoreDataHelper.insertMessage(address, body:body, isSend: true)
             print("Message inserted [\(address))][\(body)]")
         }
     }
@@ -127,16 +127,19 @@ class MessagesTableViewController: UIViewController, NSFetchedResultsControllerD
         let message:Message? = self.messageList?.objectAtIndexPath(indexPath) as? Message
     
         let cell:MessageViewCell? = tableView.dequeueReusableCellWithIdentifier(self.cellId, forIndexPath: indexPath) as? MessageViewCell
-    
-        if (message?.inSend?.boolValue ?? false) {
+        
+        let dateFormat = NSDateFormatter()
+        dateFormat.dateFormat = "dd-MM-yyyy"
+        
+        if (message?.isSend?.boolValue ?? false) {
             cell?.sendText?.text = message?.body
-            cell?.sendDate.text = message?.timestamp?.description
+            cell?.sendDate.text = dateFormat.stringFromDate(message?.timestamp ?? NSDate())
 
             cell?.sendContainer.hidden = false
             cell?.receivedContainer.hidden = true
         } else {
             cell?.receivedText?.text = message?.body
-            cell?.receivedText.text = message?.timestamp?.description
+            cell?.receivedData.text = dateFormat.stringFromDate(message?.timestamp ?? NSDate())
             
             cell?.sendContainer.hidden = true
             cell?.receivedContainer.hidden = false

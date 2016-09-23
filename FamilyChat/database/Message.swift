@@ -2,7 +2,7 @@
 //  Message.swift
 //  FamilyChat
 //
-//  Created by 이상화 on 2016. 9. 13..
+//  Created by 이상화 on 2016. 9. 22..
 //  Copyright © 2016년 lee. All rights reserved.
 //
 
@@ -13,5 +13,5 @@ import CoreData
 class Message: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
-    
+
 }

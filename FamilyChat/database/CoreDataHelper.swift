@@ -69,14 +69,15 @@ class CoreDataHelper: NSObject {
 
     }
     
-    static func insertMessage(address: String!, body: String!) {
+    static func insertMessage(address: String!, body: String!, isSend:Bool) -> Message {
         let context = self.getManagedObjectContext()
         let entity = NSEntityDescription.entityForName("Message", inManagedObjectContext: context)!
-        let newMessage = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
+        let newMessage:Message = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as! Message
         
-        newMessage.setValue(NSDate(), forKey: "timestamp")
-        newMessage.setValue(address, forKey: "address")
-        newMessage.setValue(body, forKey: "body")
+        newMessage.timestamp = NSDate()
+        newMessage.address = address
+        newMessage.body = body
+        newMessage.isSend = NSNumber.init(bool: isSend)
         
         // Save the context
         do {
@@ -84,6 +85,8 @@ class CoreDataHelper: NSObject {
         } catch {
             abort()
         }
+        
+        return newMessage
     }
     
     static func getCurrentUserId() -> String {
