@@ -16,4 +16,10 @@ class ValidationUtils: NSObject {
         
         return false
     }
+    
+    static func showAlertView(title:String!, message:String!, clickTitle:String!, viewController:UIViewController!) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: clickTitle, style: UIAlertActionStyle.Default, handler: nil))
+        viewController.presentViewController(alert, animated: true, completion: nil)
+    }
 }
