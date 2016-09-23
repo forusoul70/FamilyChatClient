@@ -132,14 +132,14 @@ class MessagesTableViewController: UIViewController, NSFetchedResultsControllerD
         dateFormat.dateFormat = "dd-MM-yyyy"
         
         if (message?.isSend?.boolValue ?? false) {
-            cell?.sendText?.text = message?.body
-            cell?.sendDate.text = dateFormat.stringFromDate(message?.timestamp ?? NSDate())
+            cell?.sendBody?.text = message?.body
+            cell?.sendTimestamp.text = dateFormat.stringFromDate(message?.timestamp ?? NSDate())
 
             cell?.sendContainer.hidden = false
             cell?.receivedContainer.hidden = true
         } else {
-            cell?.receivedText?.text = message?.body
-            cell?.receivedData.text = dateFormat.stringFromDate(message?.timestamp ?? NSDate())
+            cell?.receivedBody?.text = message?.body
+            cell?.receivedTiimestamp.text = dateFormat.stringFromDate(message?.timestamp ?? NSDate())
             
             cell?.sendContainer.hidden = true
             cell?.receivedContainer.hidden = false

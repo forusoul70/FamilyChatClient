@@ -9,14 +9,15 @@
 import UIKit
 
 class MessageViewCell: UITableViewCell {
-
-    @IBOutlet weak var receivedText: UILabel!
-    @IBOutlet weak var sendText: UILabel!
-    @IBOutlet weak var receivedData: UILabel!
-    @IBOutlet weak var sendDate: UILabel!
     
-    @IBOutlet weak var receivedContainer: UIStackView!
-    @IBOutlet weak var sendContainer: UIStackView!
+    @IBOutlet weak var sendContainer: UIView!
+    @IBOutlet weak var receivedContainer: UIView!
+    
+    @IBOutlet weak var receivedBody: UILabel!
+    @IBOutlet weak var receivedTiimestamp: UILabel!
+    @IBOutlet weak var sendBody: UILabel!
+    @IBOutlet weak var sendTimestamp: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
