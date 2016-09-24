@@ -74,10 +74,10 @@ class CoreDataHelper: NSObject {
         let entity = NSEntityDescription.entity(forEntityName: "Message", in: context)!
         let newMessage:Message = NSEntityDescription.insertNewObject(forEntityName: entity.name!, into: context) as! Message
         
-        newMessage.timestamp = Date()
+        newMessage.timestamp = NSDate()
         newMessage.address = address
         newMessage.body = body
-        newMessage.isSend = NSNumber.init(value: isSend as Bool)
+        newMessage.isSend = isSend
         
         // Save the context
         do {

@@ -131,7 +131,7 @@ class MessagesTableViewController: UIViewController, NSFetchedResultsControllerD
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "dd-MM-yyyy"
         
-        if (message?.isSend?.boolValue ?? false) {
+        if (message?.isSend ?? false) {
             cell?.sendBody?.text = message?.body
             cell?.sendTimestamp.text = dateFormat.string(from: message?.timestamp as Date? ?? Date())
 

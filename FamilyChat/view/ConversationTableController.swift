@@ -57,15 +57,12 @@ class ConversationTableController: BaseUIViewController, UITableViewDelegate, UI
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let message:Message! = self.conversationList?.object(at: indexPath)
+        let message = self.conversationList?.object(at: indexPath)
         
         let cell:ConversationCell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! ConversationCell
         
-        cell.addressLabel.text = message?.address!.description
-//        cell.detailTextLabel?.text = message?.body
-        
-//        cell.addressLabel.text = message?.value(forKey: "address") as! String
-        
+        cell.addressLabel.text = message?.value(forKey: "address") as? String
+        cell.detailTextLabel?.text = message?.value(forKey: "body") as? String
         return cell
     }
     
