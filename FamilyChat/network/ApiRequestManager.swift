@@ -12,8 +12,8 @@ private let _sharedApiRequestManger = ApiRequestManager()
 
 class ApiRequestManager: NSObject {
     
-    private let SERVER_URL = "https://com-sanghwa-familychat.herokuapp.com/"
-//    private let SERVER_URL = "http://localhost:8080/"
+//    private let SERVER_URL = "https://com-sanghwa-familychat.herokuapp.com/"
+    private let SERVER_URL = "http://localhost:8080/"
     
     private let API_LOGIN = "membership/login"
 
@@ -21,7 +21,7 @@ class ApiRequestManager: NSObject {
         return _sharedApiRequestManger
     }
     
-    private func requestApi(api:String!, body:String!, completeHandler: (Int?, NSString?) -> Void) {
+    private func requestApi(api:String!, body:String!, completeHandler: (Int?, [String : AnyObject]?) -> Void) {
         let url = NSURL(string: SERVER_URL + api)
         let request = NSMutableURLRequest(URL: url!)
         request.HTTPMethod = "POST"
@@ -35,28 +35,38 @@ class ApiRequestManager: NSObject {
         
         let task = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
             
-            if (response == nil) {
+            if (response == nil || data == nil) {
                 print("requestApi(), Failed to get response")
                 return
             }
             
-            let body:NSString!
-            if (data == nil) {
-                body = "Failed to get body from response"
-            } else {
-                body = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            let resultCode = (response as! NSHTTPURLResponse).statusCode
+            var resJson:AnyObject!
+            let body:NSString! = NSString(data: data!, encoding: NSUTF8StringEncoding)
+
+            do {
+                resJson = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions())
+                
+                print("APi [\(api)]")
+                print("response [\(body)]")
+                
+            } catch {
+                let errorRes = ["error" : body]
+                completeHandler(resultCode, errorRes)
+                return
             }
             
-            let resultCode = (response as! NSHTTPURLResponse).statusCode
-            completeHandler(resultCode, body)
-            
-            print("APi [\(api)]")
-            print("response [\(body)]")
+            if (resJson != nil) {
+                completeHandler(resultCode, resJson as? [String: AnyObject])
+            } else {
+                completeHandler(resultCode, nil)
+            }
+           
         })
         task.resume()
     }
     
-    func requestLogin(id:String!, password:String!, compeleteHandler: (Bool, NSString?) -> Void) {
+    func requestLogin(id:String!, password:String!, compeleteHandler: (Bool, [String: AnyObject]?) -> Void) {
         let body: Dictionary<String, String> = ["id": id, "password": password]
         do {
             let encodedBody = try NSString(data: NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions.PrettyPrinted),
