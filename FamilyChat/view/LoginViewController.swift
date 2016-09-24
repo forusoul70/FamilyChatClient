@@ -52,6 +52,8 @@ class LoginViewController: BaseUIViewController {
                 }
             }
         })
+        
+        self.performSegueWithIdentifier(self.loginSegueId, sender: sender)
     }
     
 //    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
