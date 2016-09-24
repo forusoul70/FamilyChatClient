@@ -17,12 +17,10 @@ class BaseUIViewController: UIViewController {
             let indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
             indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
             indicator.center = view.center
-
-            
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             self.progressView = indicator
         }
-        
+
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         self.view.addSubview(self.progressView!)
         self.progressView?.bringSubviewToFront(view)
         self.progressView?.startAnimating()
@@ -36,6 +34,7 @@ class BaseUIViewController: UIViewController {
             self.progressView!.stopAnimating()
             self.progressView!.removeFromSuperview()
         }
-        
+       
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
 }
