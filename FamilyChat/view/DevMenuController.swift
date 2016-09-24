@@ -20,7 +20,7 @@ class DevMenuController: UIViewController {
     }
     
     
-    @IBAction func onAddMessageButtonClicked(sender: AnyObject) {
+    @IBAction func onAddMessageButtonClicked(_ sender: AnyObject) {
         // Get input text
         let name = self.nameEditText.text;
         let message = self.bodyEditText.text;

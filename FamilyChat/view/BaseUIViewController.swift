@@ -10,31 +10,31 @@ import UIKit
 
 class BaseUIViewController: UIViewController {
     
-    private var progressView:UIActivityIndicatorView? = nil
+    fileprivate var progressView:UIActivityIndicatorView? = nil
     
     func showProgress() {
         if (self.progressView == nil) {
-            let indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-            indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+            let indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+            indicator.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
             indicator.center = view.center
             self.progressView = indicator
         }
 
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.view.addSubview(self.progressView!)
-        self.progressView?.bringSubviewToFront(view)
+        self.progressView?.bringSubview(toFront: view)
         self.progressView?.startAnimating()
-        self.progressView?.hidden = false
+        self.progressView?.isHidden = false
     }
     
     func hideProgress() {
         if (self.progressView != nil) {
-            self.view.sendSubviewToBack(self.progressView!)
-            self.progressView!.hidden = true;
+            self.view.sendSubview(toBack: self.progressView!)
+            self.progressView!.isHidden = true;
             self.progressView!.stopAnimating()
             self.progressView!.removeFromSuperview()
         }
        
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }

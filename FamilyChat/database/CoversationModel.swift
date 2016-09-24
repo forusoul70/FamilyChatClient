@@ -11,10 +11,10 @@ import UIKit
 class CoversationModel: NSObject {
     
     let address:String
-    let snippetTimestamp:NSDate
+    let snippetTimestamp:Date
     let snippetBody:String
     
-    init(address:String, timestamp:NSDate, body:String) {
+    init(address:String, timestamp:Date, body:String) {
         self.address = address
         self.snippetTimestamp = timestamp
         self.snippetBody = body

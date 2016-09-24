@@ -9,17 +9,17 @@
 import UIKit
 
 class ValidationUtils: NSObject {
-    static func isValid(str:NSString?) -> Bool {
-        if (str != nil && str?.length > 0) {
+    static func isValid(_ str:String?) -> Bool {
+        if (str != nil && str!.characters.count > 0) {
             return true
         }
         
         return false
     }
     
-    static func showAlertView(title:String!, message:String!, clickTitle:String!, viewController:UIViewController!) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: clickTitle, style: UIAlertActionStyle.Default, handler: nil))
-        viewController.presentViewController(alert, animated: true, completion: nil)
+    static func showAlertView(_ title:String!, message:String!, clickTitle:String!, viewController:UIViewController!) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: clickTitle, style: UIAlertActionStyle.default, handler: nil))
+        viewController.present(alert, animated: true, completion: nil)
     }
 }

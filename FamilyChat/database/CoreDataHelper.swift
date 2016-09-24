@@ -13,14 +13,14 @@ import UIKit
 class CoreDataHelper: NSObject {
     
     static func getManagedObjectContext() -> NSManagedObjectContext {
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let delegate = UIApplication.shared.delegate as! AppDelegate
         return delegate.managedObjectContext
     }
     
-    static func getMessageByAddress(address:String!) -> NSFetchedResultsController {
-        let fetchRequest = NSFetchRequest()
+    static func getMessageByAddress(_ address:String!) -> NSFetchedResultsController<Message> {
+        let fetchRequest = NSFetchRequest<Message>()
         // Edit the entity name as appropriate
-        let entity = NSEntityDescription.entityForName("Message", inManagedObjectContext: getManagedObjectContext())
+        let entity = NSEntityDescription.entity(forEntityName: "Message", in: getManagedObjectContext())
         fetchRequest.entity = entity
         
         // set the batch size to suitable umber
@@ -37,10 +37,10 @@ class CoreDataHelper: NSObject {
     }
     
     //TODO Grouping 해야함
-    static func getConversationList() -> NSFetchedResultsController {
-        let fetchRequest = NSFetchRequest()
+    static func getConversationList() -> NSFetchedResultsController<Message> {
+        let fetchRequest = NSFetchRequest<Message>()
         // Edit the entity name as appropriate
-        let entity = NSEntityDescription.entityForName("Message", inManagedObjectContext: getManagedObjectContext())
+        let entity = NSEntityDescription.entity(forEntityName: "Message", in: getManagedObjectContext())
         fetchRequest.entity = entity
         
         // sort
@@ -50,17 +50,17 @@ class CoreDataHelper: NSObject {
         // group by
         var expressionDescriptions = [AnyObject]()
         var expressionDescription:NSExpressionDescription
-        expressionDescriptions.append("address")
+        expressionDescriptions.append("address" as AnyObject)
         
         expressionDescription = NSExpressionDescription()
         expressionDescription.name = "body"
         expressionDescription.expression = NSExpression(format: "@max.timestamp")
-        expressionDescription.expressionResultType = .Integer32AttributeType
+        expressionDescription.expressionResultType = .integer32AttributeType
         expressionDescriptions.append(expressionDescription)
         
         fetchRequest.propertiesToFetch = expressionDescriptions
         fetchRequest.propertiesToGroupBy = ["address"]
-        fetchRequest.resultType = NSFetchRequestResultType.DictionaryResultType
+        fetchRequest.resultType = NSFetchRequestResultType.dictionaryResultType
         
         // Edit the sort key as appropriate
         let aFetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: getManagedObjectContext(), sectionNameKeyPath: nil, cacheName: "getConversationList_\(getCurrentUserId())")
@@ -69,15 +69,15 @@ class CoreDataHelper: NSObject {
 
     }
     
-    static func insertMessage(address: String!, body: String!, isSend:Bool) -> Message {
+    static func insertMessage(_ address: String!, body: String!, isSend:Bool) -> Message {
         let context = self.getManagedObjectContext()
-        let entity = NSEntityDescription.entityForName("Message", inManagedObjectContext: context)!
-        let newMessage:Message = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as! Message
+        let entity = NSEntityDescription.entity(forEntityName: "Message", in: context)!
+        let newMessage:Message = NSEntityDescription.insertNewObject(forEntityName: entity.name!, into: context) as! Message
         
-        newMessage.timestamp = NSDate()
+        newMessage.timestamp = Date()
         newMessage.address = address
         newMessage.body = body
-        newMessage.isSend = NSNumber.init(bool: isSend)
+        newMessage.isSend = NSNumber.init(value: isSend as Bool)
         
         // Save the context
         do {

@@ -14,13 +14,13 @@ class LoginViewController: BaseUIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var checkPassswordInfo: UILabel!
     
-    private let loginSegueId = "loginSegue"
+    fileprivate let loginSegueId = "loginSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.checkPassswordInfo.hidden = true;
+        self.checkPassswordInfo.isHidden = true;
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,12 +28,12 @@ class LoginViewController: BaseUIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onLoginButtonClickd(sender: AnyObject) {
+    @IBAction func onLoginButtonClickd(_ sender: AnyObject) {
         let id = self.idTextField.text
         let password = self.passwordTextField.text
         
         if (ValidationUtils.isValid(id) == false || ValidationUtils.isValid(password) == false) {
-            print("Id or Password is empty")
+            ValidationUtils.showAlertView("에러", message: "아이디와 패스워드를 입력해주세요", clickTitle: "확인", viewController: self)
             return
         }
         
@@ -41,19 +41,17 @@ class LoginViewController: BaseUIViewController {
         ApiRequestManager.shared.requestLogin(id, password: password, compeleteHandler: {(result, body) in
             
             if (result) {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.hideProgress()
-                    self.performSegueWithIdentifier(self.loginSegueId, sender: sender)
+                    self.performSegue(withIdentifier: self.loginSegueId, sender: sender)
                 }
             } else {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.hideProgress()
                     ValidationUtils.showAlertView("에러", message: "아이디나 패스워드가 틀립니다", clickTitle: "확인", viewController: self)
                 }
             }
         })
-        
-        self.performSegueWithIdentifier(self.loginSegueId, sender: sender)
     }
     
 //    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {

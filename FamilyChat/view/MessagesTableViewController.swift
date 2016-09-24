@@ -14,12 +14,12 @@ class MessagesTableViewController: UIViewController, NSFetchedResultsControllerD
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextFeild: UITextField!
     
-    private let cellId = "messagecell"
+    fileprivate let cellId = "messagecell"
     var conversation:CoversationModel?
-    var messageList:NSFetchedResultsController?
-    private let sendingMessageQue:NSOperationQueue = NSOperationQueue()
+    var messageList:NSFetchedResultsController<Message>?
+    fileprivate let sendingMessageQue:OperationQueue = OperationQueue()
     
-    class SendingMessageOperation : NSOperation {
+    class SendingMessageOperation : Operation {
         let address:String?
         let body:String?
         
@@ -32,7 +32,7 @@ class MessagesTableViewController: UIViewController, NSFetchedResultsControllerD
             insertNewSendMessage()
         }
         
-        private func insertNewSendMessage() {
+        fileprivate func insertNewSendMessage() {
             if (ValidationUtils.isValid(body) == false) {
                 return
             }
@@ -46,7 +46,7 @@ class MessagesTableViewController: UIViewController, NSFetchedResultsControllerD
         }
     }
     
-    @IBAction func onSendButtonClicked(sender: AnyObject) {
+    @IBAction func onSendButtonClicked(_ sender: AnyObject) {
         let message = self.messageTextFeild.text
         if (ValidationUtils.isValid(message) == false) {
             return
@@ -66,7 +66,7 @@ class MessagesTableViewController: UIViewController, NSFetchedResultsControllerD
     
     
     
-    private func loadMessageList() {
+    fileprivate func loadMessageList() {
         if (self.conversation == nil) {
             return
         }
@@ -81,13 +81,13 @@ class MessagesTableViewController: UIViewController, NSFetchedResultsControllerD
         self.messageList?.delegate = self
     }
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         print("controllerWillChangeContent called")
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         print("controllerDidChangeContent called")
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
@@ -114,35 +114,35 @@ class MessagesTableViewController: UIViewController, NSFetchedResultsControllerD
 
     // MARK: - Table view data sourc
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.messageList?.sections?.count ?? 0;
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionInfo = self.messageList?.sections![section]
         return sectionInfo?.numberOfObjects ?? 0
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let message:Message? = self.messageList?.objectAtIndexPath(indexPath) as? Message
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let message:Message? = self.messageList?.object(at: indexPath)
     
-        let cell:MessageViewCell? = tableView.dequeueReusableCellWithIdentifier(self.cellId, forIndexPath: indexPath) as? MessageViewCell
+        let cell:MessageViewCell? = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as? MessageViewCell
         
-        let dateFormat = NSDateFormatter()
+        let dateFormat = DateFormatter()
         dateFormat.dateFormat = "dd-MM-yyyy"
         
         if (message?.isSend?.boolValue ?? false) {
             cell?.sendBody?.text = message?.body
-            cell?.sendTimestamp.text = dateFormat.stringFromDate(message?.timestamp ?? NSDate())
+            cell?.sendTimestamp.text = dateFormat.string(from: message?.timestamp as Date? ?? Date())
 
-            cell?.sendContainer.hidden = false
-            cell?.receivedContainer.hidden = true
+            cell?.sendContainer.isHidden = false
+            cell?.receivedContainer.isHidden = true
         } else {
             cell?.receivedBody?.text = message?.body
-            cell?.receivedTiimestamp.text = dateFormat.stringFromDate(message?.timestamp ?? NSDate())
+            cell?.receivedTiimestamp.text = dateFormat.string(from: message?.timestamp as Date? ?? Date())
             
-            cell?.sendContainer.hidden = true
-            cell?.receivedContainer.hidden = false
+            cell?.sendContainer.isHidden = true
+            cell?.receivedContainer.isHidden = false
         }
         
         return cell ?? UITableViewCell()

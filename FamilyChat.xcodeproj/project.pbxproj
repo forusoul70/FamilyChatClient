@@ -11,8 +11,6 @@
 		277D63BD1D87A30300D43ED4 /* DevMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277D63BC1D87A30300D43ED4 /* DevMenuController.swift */; };
 		277D63C01D87A57300D43ED4 /* ValidationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277D63BF1D87A57300D43ED4 /* ValidationUtils.swift */; };
 		2790D7A91D8468A9002D782B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D7A81D8468A9002D782B /* LoginViewController.swift */; };
-		27958EAB1D9425280083A498 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27958EA91D9425280083A498 /* Message+CoreDataProperties.swift */; };
-		27958EAC1D9425280083A498 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27958EAA1D9425280083A498 /* Message.swift */; };
 		279BD3AC1D8BA45A00700A64 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279BD3AB1D8BA45A00700A64 /* MessagesTableViewController.swift */; };
 		279BD3AE1D8BA64700700A64 /* CoversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279BD3AD1D8BA64700700A64 /* CoversationModel.swift */; };
 		279C86CE1D94C5B700B9CF7F /* default_profile.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 279C86CD1D94C5B700B9CF7F /* default_profile.jpeg */; };
@@ -33,8 +31,6 @@
 		277D63BC1D87A30300D43ED4 /* DevMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DevMenuController.swift; path = view/DevMenuController.swift; sourceTree = "<group>"; };
 		277D63BF1D87A57300D43ED4 /* ValidationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValidationUtils.swift; path = utils/ValidationUtils.swift; sourceTree = "<group>"; };
 		2790D7A81D8468A9002D782B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = view/LoginViewController.swift; sourceTree = "<group>"; };
-		27958EA91D9425280083A498 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "database/Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		27958EAA1D9425280083A498 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = database/Message.swift; sourceTree = "<group>"; };
 		279BD3AB1D8BA45A00700A64 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesTableViewController.swift; path = view/MessagesTableViewController.swift; sourceTree = "<group>"; };
 		279BD3AD1D8BA64700700A64 /* CoversationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoversationModel.swift; path = database/CoversationModel.swift; sourceTree = "<group>"; };
 		279C86CD1D94C5B700B9CF7F /* default_profile.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = default_profile.jpeg; path = resource/image/default_profile.jpeg; sourceTree = "<group>"; };
@@ -111,8 +107,6 @@
 			children = (
 				272A428F1D8500640068FEF0 /* CoreDataHelper.swift */,
 				279BD3AD1D8BA64700700A64 /* CoversationModel.swift */,
-				27958EA91D9425280083A498 /* Message+CoreDataProperties.swift */,
-				27958EAA1D9425280083A498 /* Message.swift */,
 			);
 			name = database;
 			sourceTree = "<group>";
@@ -189,11 +183,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = lee;
 				TargetAttributes = {
 					27A8024D1D83E4D50003358A = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -237,14 +232,12 @@
 				27B08F191D95091A00FA096D /* BaseUIViewController.swift in Sources */,
 				27A8026D1D83EA7A0003358A /* ConversationTableController.swift in Sources */,
 				272A42901D8500640068FEF0 /* CoreDataHelper.swift in Sources */,
-				27958EAB1D9425280083A498 /* Message+CoreDataProperties.swift in Sources */,
 				277D63BD1D87A30300D43ED4 /* DevMenuController.swift in Sources */,
 				279BD3AE1D8BA64700700A64 /* CoversationModel.swift in Sources */,
 				27A8025A1D83E4D50003358A /* FamilyChat.xcdatamodeld in Sources */,
 				2790D7A91D8468A9002D782B /* LoginViewController.swift in Sources */,
 				27A802521D83E4D50003358A /* AppDelegate.swift in Sources */,
 				27C1C9311D92B6EC00D0BB72 /* MessageViewCell.swift in Sources */,
-				27958EAC1D9425280083A498 /* Message.swift in Sources */,
 				27C378A51D9027990023789F /* ConversationCell.swift in Sources */,
 				277D63C01D87A57300D43ED4 /* ValidationUtils.swift in Sources */,
 				27B08F171D94E50000FA096D /* ApiRequestManager.swift in Sources */,
@@ -287,8 +280,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -331,8 +326,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -351,6 +348,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -366,6 +364,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FamilyChat/FamilyChat-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -379,6 +378,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = lee.prod.FamilyChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FamilyChat/FamilyChat-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
