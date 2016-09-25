@@ -44,6 +44,7 @@ class LoginViewController: BaseUIViewController {
                 DispatchQueue.main.async {
                     self.hideProgress()
                     self.performSegue(withIdentifier: self.loginSegueId, sender: sender)
+                    SocketIOManager.shared.requestRegiestAccountId(account: "test") // FIX ME
                 }
             } else {
                 DispatchQueue.main.async {
@@ -55,17 +56,8 @@ class LoginViewController: BaseUIViewController {
     }
     
 //    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-//        if (identifier == "login") {
-//            let id = self.idTextField.text;
-//            let password = self.passwordTextField.text;
-//        
-//            // TODO : FIXME
-//            if (id == "test" && password == "1234") {
-//                return true;
-//            }
-//        
-//            self.checkPassswordInfo.hidden = false;
-//            return false;
+//        if (identifier == self.loginSegueId) {
+//            SocketIOManager.shared.requestRegiestAccountId(account: "test")
 //        }
 //        return true
 //    }

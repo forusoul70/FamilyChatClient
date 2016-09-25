@@ -34,6 +34,7 @@ class ApiRequestManager: NSObject {
             
             if (response == nil || data == nil) {
                 print("requestApi(), Failed to get response")
+                completeHandler(500, nil)
                 return
             }
             

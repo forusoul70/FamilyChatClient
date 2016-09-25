@@ -19,6 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let dirPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         print("App Path: \(dirPaths)")
+        
+        // start socket io
+        SocketIOManager.shared.requestStart()
+    
         return true
     }
 
