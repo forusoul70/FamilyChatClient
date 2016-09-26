@@ -74,12 +74,12 @@ class SocketIOManager: NSObject {
                 return
             }
             
-            let requestJson = [
+            let requestEntity:NSDictionary = [
                 "api": API_ACCOUNT_ID,
-                "accountId": (account)
+                "accountId": account!
             ]
             
-            self.connectedSocket?.emit(SOCKET_PROTOCOL, requestJson)
+            self.connectedSocket?.emit(SOCKET_PROTOCOL, requestEntity)
         }
     }
     
