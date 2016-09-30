@@ -23,7 +23,7 @@ class ConversationTableController: BaseUIViewController, UITableViewDelegate, UI
         } catch{
             abort()
         }
-        
+        self.tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -36,6 +36,11 @@ class ConversationTableController: BaseUIViewController, UITableViewDelegate, UI
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         loadConversationList()
+        BroadcastManager.shared.addListener(eventName: "insertMessage") {
+            DispatchQueue.main.async {
+                self.loadConversationList()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

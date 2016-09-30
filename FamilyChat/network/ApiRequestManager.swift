@@ -13,7 +13,7 @@ private let _sharedApiRequestManger = ApiRequestManager()
 class ApiRequestManager: NSObject {
     
 //    private let SERVER_URL = "https://com-sanghwa-familychat.herokuapp.com/"
-    fileprivate let SERVER_URL = "http://localhost:8080/"
+    fileprivate let SERVER_URL = "http://localhost:5000/"
     
     fileprivate let API_LOGIN = "membership/login"
 

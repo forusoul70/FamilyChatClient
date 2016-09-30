@@ -86,6 +86,8 @@ class CoreDataHelper: NSObject {
             abort()
         }
         
+        BroadcastManager.shared.sendEvnet(eventName: "insertMessage")
+        
         return newMessage
     }
     

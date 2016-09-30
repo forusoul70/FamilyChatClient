@@ -13,7 +13,7 @@ private let _instance = SocketIOManager()
 class SocketIOManager: NSObject {
     
 //    fileprivate let SERVER_URL = "https://com-sanghwa-familychat.herokuapp.com/"
-    private let SERVER_URL = "http://localhost:8080/"
+    private let SERVER_URL = "http://localhost:5000/"
     private let API_ACCOUNT_ID = "setAccountId"
     private let SOCKET_PROTOCOL = "message"
     
@@ -57,7 +57,27 @@ class SocketIOManager: NSObject {
             self.connectedSocket = SocketIOClient(socketURL: url!)
             self.connectedSocket?.connect()
             self.connectedSocket?.onAny {
-                print("Got event: \($0.event), with items: \($0.items)")
+                print($0.items)
+                if ($0.items != nil && $0.items!.count > 0) {
+                    let message:String! = $0.items![0] as! String;
+                    let rawMessage = message.data(using: String.Encoding.utf8)
+                    
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: rawMessage!, options: []) as! [String: AnyObject]
+                        let addressFrom = json["from"] as? String
+                        let message = json["message"] as? String
+                        
+                        if (ValidationUtils.isValid(addressFrom) == false ||
+                            ValidationUtils.isValid(message) == false) {
+                            print("Failed to parse message from server \(message)")
+                            return
+                        }
+                        
+                        CoreDataHelper.insertMessage(addressFrom, body: message, isSend: false)
+                    } catch {
+                        abort()
+                    }
+                }
             }
         }
     }

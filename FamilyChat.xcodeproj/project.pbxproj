@@ -50,6 +50,7 @@
 		27B08F191D95091A00FA096D /* BaseUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B08F181D95091A00FA096D /* BaseUIViewController.swift */; };
 		27C1C9311D92B6EC00D0BB72 /* MessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C1C9301D92B6EC00D0BB72 /* MessageViewCell.swift */; };
 		27C378A51D9027990023789F /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C378A41D9027990023789F /* ConversationCell.swift */; };
+		27EEAB4C1D9EC54E0001F7B3 /* BroadcastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEAB4B1D9EC54E0001F7B3 /* BroadcastManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,7 @@
 		27B08F181D95091A00FA096D /* BaseUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseUIViewController.swift; path = view/BaseUIViewController.swift; sourceTree = "<group>"; };
 		27C1C9301D92B6EC00D0BB72 /* MessageViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageViewCell.swift; path = view/MessageViewCell.swift; sourceTree = "<group>"; };
 		27C378A41D9027990023789F /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationCell.swift; path = view/ConversationCell.swift; sourceTree = "<group>"; };
+		27EEAB4B1D9EC54E0001F7B3 /* BroadcastManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BroadcastManager.swift; path = engine/BroadcastManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 		27A802501D83E4D50003358A /* FamilyChat */ = {
 			isa = PBXGroup;
 			children = (
+				27EEAB491D9EC5120001F7B3 /* engine */,
 				277917E61D9767750036DBD4 /* external */,
 				27B08F151D94E4D000FA096D /* network */,
 				27C378A61D9028D20023789F /* resource */,
@@ -248,6 +251,14 @@
 				279C86CD1D94C5B700B9CF7F /* default_profile.jpeg */,
 			);
 			name = image;
+			sourceTree = "<group>";
+		};
+		27EEAB491D9EC5120001F7B3 /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				27EEAB4B1D9EC54E0001F7B3 /* BroadcastManager.swift */,
+			);
+			name = engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,6 +341,7 @@
 				277918081D9767900036DBD4 /* SocketEngineSpec.swift in Sources */,
 				2779181B1D976E9F0036DBD4 /* Utils.swift in Sources */,
 				277918031D9767900036DBD4 /* SocketClientManager.swift in Sources */,
+				27EEAB4C1D9EC54E0001F7B3 /* BroadcastManager.swift in Sources */,
 				277918071D9767900036DBD4 /* SocketEnginePollable.swift in Sources */,
 				277918051D9767900036DBD4 /* SocketEngineClient.swift in Sources */,
 				277918131D9767900036DBD4 /* SocketParsable.swift in Sources */,
