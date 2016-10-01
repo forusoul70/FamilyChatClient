@@ -66,19 +66,14 @@ class ApiRequestManager: NSObject {
     
     func requestLogin(_ id:String!, password:String!, compeleteHandler: @escaping (Bool, [String: AnyObject]?) -> Void) {
         let body: Dictionary<String, String> = ["id": id, "password": password]
-        do {
-            let encodedBody = try NSString(data: JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted),
-                encoding: String.Encoding.utf8.rawValue) as! String
-            
-            self.requestApi(API_LOGIN, body:encodedBody, completeHandler: {(resCode, responseBody) in
-                if (resCode == 201) {
-                    compeleteHandler(true, responseBody)
-                } else {
-                    compeleteHandler(false, nil)
-                }
-            })
-        } catch {
-            abort()
-        }
+        
+        let encodedBody = Utils.convertJsonStringWithDictionary(body)
+        self.requestApi(API_LOGIN, body:encodedBody, completeHandler: {(resCode, responseBody) in
+            if (resCode == 201) {
+                compeleteHandler(true, responseBody)
+            } else {
+                compeleteHandler(false, nil)
+            }
+        })
     }
 }

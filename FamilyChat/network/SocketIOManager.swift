@@ -94,12 +94,11 @@ class SocketIOManager: NSObject {
                 return
             }
             
-            let requestEntity:NSDictionary = [
+            let requestEntity:Dictionary<String, String> = [
                 "api": API_ACCOUNT_ID,
                 "accountId": account!
             ]
-            
-            self.connectedSocket?.emit(SOCKET_PROTOCOL, requestEntity)
+            self.connectedSocket?.emit(SOCKET_PROTOCOL, Utils.convertJsonStringWithDictionary(requestEntity))
         }
     }
     

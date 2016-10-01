@@ -16,5 +16,19 @@ class Utils: NSObject {
             objc_sync_exit(lockObj)
         }
     }
+    
+    static func convertJsonStringWithDictionary(_ dic:Dictionary<String, String>?) -> String {
+        if (dic == nil) {
+            return "";
+        }
+        
+        do {
+            let data = try JSONSerialization.data(withJSONObject: dic!, options: JSONSerialization.WritingOptions.prettyPrinted)
+            return String.init(data: data, encoding: String.Encoding.utf8)!
+        } catch {
+            print("convertJsonStringWithDictionary(), Failed")
+            return ""
+        }
+    }
 
 }
