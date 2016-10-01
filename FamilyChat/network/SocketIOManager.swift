@@ -16,6 +16,7 @@ class SocketIOManager: NSObject {
     private let SERVER_URL = "http://localhost:5000/"
     private let API_ACCOUNT_ID = "setAccountId"
     private let SOCKET_PROTOCOL = "message"
+    private let CHAT_PROTOCOL = "chat"
     
     
     // instance member
@@ -56,10 +57,20 @@ class SocketIOManager: NSObject {
         Utils.synchronize(lockObj: self.SOCKET_LCOK) {
             self.connectedSocket = SocketIOClient(socketURL: url!)
             self.connectedSocket?.connect()
-            self.connectedSocket?.onAny {
-                print($0.items)
-                if ($0.items != nil && $0.items!.count > 0) {
-                    let message:String! = $0.items![0] as! String;
+            
+            self.connectedSocket?.onAny({(socketAnyEvent) in
+                let event = socketAnyEvent.event;
+                if (ValidationUtils.isValid(event) == false) {
+                    return
+                }
+                
+                let items = socketAnyEvent.items;
+                if (event == self.CHAT_PROTOCOL) {
+                    if (items == nil || items!.count == 0) {
+                        return
+                    }
+                    
+                    let message:String! = items![0] as! String;
                     let rawMessage = message.data(using: String.Encoding.utf8)
                     
                     do {
@@ -77,8 +88,10 @@ class SocketIOManager: NSObject {
                     } catch {
                         abort()
                     }
+                } else {
+                    // TODO connection manage
                 }
-            }
+            })
         }
     }
     
