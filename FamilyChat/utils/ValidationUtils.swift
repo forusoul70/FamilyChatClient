@@ -18,8 +18,15 @@ class ValidationUtils: NSObject {
     }
     
     static func showAlertView(_ title:String!, message:String!, clickTitle:String!, viewController:UIViewController!) {
+        showAlertView(title, message: message, clickTitle: clickTitle, viewController: viewController) { (alertAction) in
+            
+        }
+    }
+    
+    static func showAlertView(_ title:String!, message:String!, clickTitle:String!, viewController:UIViewController!,
+                              titleHandler:@escaping (UIAlertAction)->Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: clickTitle, style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: clickTitle, style: UIAlertActionStyle.default, handler: titleHandler))
         viewController.present(alert, animated: true, completion: nil)
     }
 }

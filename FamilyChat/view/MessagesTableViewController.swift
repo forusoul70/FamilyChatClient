@@ -29,6 +29,7 @@ class MessagesTableViewController: UIViewController, NSFetchedResultsControllerD
         }
         
         override func main() {
+            SocketIOManager.shared.requestSendMessage(to: address, message: body)
             insertNewSendMessage()
         }
         

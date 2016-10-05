@@ -10,17 +10,25 @@ import Foundation
 import CoreData
 import UIKit
 
+private let _sharedManager = CoreDataHelper()
+
 class CoreDataHelper: NSObject {
+    private let _managedContext:NSManagedObjectContext!;
     
-    static func getManagedObjectContext() -> NSManagedObjectContext {
+    override
+    init() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
-        return delegate.managedObjectContext
+        _managedContext = delegate.managedObjectContext
+    }
+    
+    class var shared : CoreDataHelper {
+        return _sharedManager
     }
     
     static func getMessageByAddress(_ address:String!) -> NSFetchedResultsController<Message> {
         let fetchRequest = NSFetchRequest<Message>()
         // Edit the entity name as appropriate
-        let entity = NSEntityDescription.entity(forEntityName: "Message", in: getManagedObjectContext())
+        let entity = NSEntityDescription.entity(forEntityName: "Message", in: shared._managedContext)
         fetchRequest.entity = entity
         
         // set the batch size to suitable umber
@@ -31,7 +39,7 @@ class CoreDataHelper: NSObject {
         fetchRequest.sortDescriptors = [sort]
         
         // Edit the sort key as appropriate
-        let aFetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: getManagedObjectContext(), sectionNameKeyPath: nil, cacheName: "getMessageByAddress_\(address)_\(getCurrentUserId())")
+        let aFetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: shared._managedContext, sectionNameKeyPath: nil, cacheName: "getMessageByAddress_\(address)_\(shared.getCurrentUserId())")
         
         return aFetchedResultController
     }
@@ -40,7 +48,7 @@ class CoreDataHelper: NSObject {
     static func getConversationList() -> NSFetchedResultsController<Message> {
         let fetchRequest = NSFetchRequest<Message>()
         // Edit the entity name as appropriate
-        let entity = NSEntityDescription.entity(forEntityName: "Message", in: getManagedObjectContext())
+        let entity = NSEntityDescription.entity(forEntityName: "Message", in: shared._managedContext)
         fetchRequest.entity = entity
         
         // sort
@@ -63,16 +71,15 @@ class CoreDataHelper: NSObject {
         fetchRequest.resultType = NSFetchRequestResultType.dictionaryResultType
         
         // Edit the sort key as appropriate
-        let aFetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: getManagedObjectContext(), sectionNameKeyPath: nil, cacheName: "getConversationList_\(getCurrentUserId())")
+        let aFetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: shared._managedContext, sectionNameKeyPath: nil, cacheName: "getConversationList_\(shared.getCurrentUserId())")
         
         return aFetchedResultController
 
     }
     
     static func insertMessage(_ address: String!, body: String!, isSend:Bool) -> Message {
-        let context = self.getManagedObjectContext()
-        let entity = NSEntityDescription.entity(forEntityName: "Message", in: context)!
-        let newMessage:Message = NSEntityDescription.insertNewObject(forEntityName: entity.name!, into: context) as! Message
+        let entity = NSEntityDescription.entity(forEntityName: "Message", in: shared._managedContext)!
+        let newMessage:Message = NSEntityDescription.insertNewObject(forEntityName: entity.name!, into: shared._managedContext) as! Message
         
         newMessage.timestamp = NSDate()
         newMessage.address = address
@@ -81,7 +88,7 @@ class CoreDataHelper: NSObject {
         
         // Save the context
         do {
-            try context.save()
+            try shared._managedContext.save()
         } catch {
             abort()
         }
@@ -91,8 +98,38 @@ class CoreDataHelper: NSObject {
         return newMessage
     }
     
-    static func getCurrentUserId() -> String {
-        //TODO FIXME 
-        return "test"
+    func getCurrentUserId() -> String {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileURL = documentsURL.appendingPathComponent("preference").path
+        
+        if (FileManager.default.fileExists(atPath: fileURL) == false) {
+            print("getCurrentUserId(), file is not exist")
+            return ""
+        }
+        
+        do {
+            let account = try String(contentsOfFile: fileURL)
+            if (ValidationUtils.isValid(account) == false) {
+                print("getCurrentUserId(), account in file is empty");
+                return ""
+            }
+            return account
+        } catch {
+            abort()
+        }
+    }
+    
+    func setAccountId(_ id:String?) {
+        if (ValidationUtils.isValid(id) == false) {
+            return
+        }
+        
+        do {
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let fileURL = documentsURL.appendingPathComponent("preference")
+            try id?.write(to: fileURL, atomically: true, encoding: .utf8)
+        } catch {
+            abort()
+        }
     }
 }

@@ -15,6 +15,7 @@ class LoginViewController: BaseUIViewController {
     @IBOutlet weak var checkPassswordInfo: UILabel!
     
     fileprivate let loginSegueId = "loginSegue"
+    fileprivate let joinSegueId = "joinSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,10 @@ class LoginViewController: BaseUIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func onJoinButtonClicked(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: self.joinSegueId, sender: sender)
     }
     
     @IBAction func onLoginButtonClickd(_ sender: AnyObject) {
@@ -41,10 +46,12 @@ class LoginViewController: BaseUIViewController {
         ApiRequestManager.shared.requestLogin(id, password: password, compeleteHandler: {(result, body) in
             
             if (result) {
+                CoreDataHelper.shared.setAccountId(id) // save current user id
                 DispatchQueue.main.async {
                     self.hideProgress()
                     self.performSegue(withIdentifier: self.loginSegueId, sender: sender)
-                    SocketIOManager.shared.requestRegiestAccountId(account: "test") // FIX ME
+                    let accountId = CoreDataHelper.shared.getCurrentUserId()
+                    SocketIOManager.shared.requestRegiestAccountId(account: accountId)
                 }
             } else {
                 DispatchQueue.main.async {

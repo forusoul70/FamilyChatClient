@@ -16,6 +16,7 @@ class ApiRequestManager: NSObject {
     fileprivate let SERVER_URL = "http://localhost:5000/"
     
     fileprivate let API_LOGIN = "membership/login"
+    fileprivate let API_JOIN = "membership/createId"
 
     class var shared : ApiRequestManager {
         return _sharedApiRequestManger
@@ -69,11 +70,28 @@ class ApiRequestManager: NSObject {
         
         let encodedBody = Utils.convertJsonStringWithDictionary(body)
         self.requestApi(API_LOGIN, body:encodedBody, completeHandler: {(resCode, responseBody) in
-            if (resCode == 201) {
+            if (resCode == 200) {
                 compeleteHandler(true, responseBody)
             } else {
                 compeleteHandler(false, nil)
             }
         })
+    }
+    
+    func requestJoin(id:String?, pw:String?, completeHandler: @escaping (Bool, [String: AnyObject]?) -> Void) {
+        if (ValidationUtils.isValid(id) == false || ValidationUtils.isValid(pw) == false) {
+            print("Input id or password is empty")
+            return completeHandler(false, nil)
+        }
+        
+        let body: Dictionary<String, String> = ["id": id!, "password": pw!]
+        let encodedBody = Utils.convertJsonStringWithDictionary(body)
+        self.requestApi(API_JOIN, body: encodedBody) { (resCode, responseBody) in
+            if (resCode == 200) {
+                completeHandler(true, responseBody)
+            } else {
+                completeHandler(false, nil)
+            }
+        }
     }
 }

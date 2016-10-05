@@ -15,6 +15,7 @@ class SocketIOManager: NSObject {
 //    fileprivate let SERVER_URL = "https://com-sanghwa-familychat.herokuapp.com/"
     private let SERVER_URL = "http://localhost:5000/"
     private let API_ACCOUNT_ID = "setAccountId"
+    private let API_SEND_MESSAGE = "sendMessage"
     private let SOCKET_PROTOCOL = "message"
     private let CHAT_PROTOCOL = "chat"
     
@@ -44,6 +45,21 @@ class SocketIOManager: NSObject {
         }
     }
     
+    public func requestSendMessage(to:String?, message:String?) {
+        if (ValidationUtils.isValid(to) == false) {
+            print("requestSendMessage(), input address to send is empty")
+            return
+        }
+        
+        if (ValidationUtils.isValid(message) == false) {
+            print("requestSendMessage(), intpu message is empty")
+            return
+        }
+        
+        self.messageQue.addOperation {
+            self.sendMessage(to:to, message:message)
+        }
+    }
     
     private func connect() {
         print("connect() requested socket io connectconnect")
@@ -103,7 +119,7 @@ class SocketIOManager: NSObject {
         
         Utils.synchronize(lockObj: SOCKET_LCOK) {
             if (self.connectedSocket == nil) {
-                print("connected socket is null")
+                print("sendMessage(), connected socket is null")
                 return
             }
             
@@ -111,8 +127,38 @@ class SocketIOManager: NSObject {
                 "api": API_ACCOUNT_ID,
                 "accountId": account!
             ]
-            self.connectedSocket?.emit(SOCKET_PROTOCOL, Utils.convertJsonStringWithDictionary(requestEntity))
+            sendSocket(requestEntity)
         }
+    }
+    
+    private func sendMessage(to:String?, message:String?) {
+        if (ValidationUtils.isValid(to) == false) {
+            print("Input addess to send is empty")
+            return
+        }
+        
+        if (ValidationUtils.isValid(message) == false) {
+            print("Input message is empty")
+            return
+        }
+        
+         Utils.synchronize(lockObj: SOCKET_LCOK) {
+            if (self.connectedSocket == nil) {
+                print("sendMessage(), connected socket is null")
+                return
+            }
+            
+            sendSocket(["api": API_SEND_MESSAGE, "messageToSend": message!,
+                        "accountId": CoreDataHelper.shared.getCurrentUserId(), "accountIdTo": to!])
+        }
+    }
+    
+    private func sendSocket(_ requestEntity:[String : String]?) {
+        if (requestEntity == nil) {
+            print("Input request entity is null")
+            return
+        }
+        self.connectedSocket?.emit(SOCKET_PROTOCOL, Utils.convertJsonStringWithDictionary(requestEntity))
     }
     
     /*

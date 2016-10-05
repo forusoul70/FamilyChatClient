@@ -46,6 +46,7 @@
 		27A8025C1D83E4D50003358A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A8025B1D83E4D50003358A /* Assets.xcassets */; };
 		27A8025F1D83E4D50003358A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A8025D1D83E4D50003358A /* LaunchScreen.storyboard */; };
 		27A8026D1D83EA7A0003358A /* ConversationTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A8026C1D83EA7A0003358A /* ConversationTableController.swift */; };
+		27AD29B61DA3EAE800431682 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AD29B51DA3EAE800431682 /* JoinViewController.swift */; };
 		27B08F171D94E50000FA096D /* ApiRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B08F161D94E50000FA096D /* ApiRequestManager.swift */; };
 		27B08F191D95091A00FA096D /* BaseUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B08F181D95091A00FA096D /* BaseUIViewController.swift */; };
 		27C1C9311D92B6EC00D0BB72 /* MessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C1C9301D92B6EC00D0BB72 /* MessageViewCell.swift */; };
@@ -95,6 +96,7 @@
 		27A8025E1D83E4D50003358A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27A802601D83E4D50003358A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27A8026C1D83EA7A0003358A /* ConversationTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationTableController.swift; path = view/ConversationTableController.swift; sourceTree = "<group>"; };
+		27AD29B51DA3EAE800431682 /* JoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JoinViewController.swift; path = view/JoinViewController.swift; sourceTree = "<group>"; };
 		27B08F161D94E50000FA096D /* ApiRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiRequestManager.swift; path = network/ApiRequestManager.swift; sourceTree = "<group>"; };
 		27B08F181D95091A00FA096D /* BaseUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseUIViewController.swift; path = view/BaseUIViewController.swift; sourceTree = "<group>"; };
 		27C1C9301D92B6EC00D0BB72 /* MessageViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageViewCell.swift; path = view/MessageViewCell.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 		27A8026E1D83EE510003358A /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				27AD29B51DA3EAE800431682 /* JoinViewController.swift */,
 				27A8026C1D83EA7A0003358A /* ConversationTableController.swift */,
 				2790D7A81D8468A9002D782B /* LoginViewController.swift */,
 				277D63BC1D87A30300D43ED4 /* DevMenuController.swift */,
@@ -346,6 +349,7 @@
 				277918051D9767900036DBD4 /* SocketEngineClient.swift in Sources */,
 				277918131D9767900036DBD4 /* SocketParsable.swift in Sources */,
 				272A42901D8500640068FEF0 /* CoreDataHelper.swift in Sources */,
+				27AD29B61DA3EAE800431682 /* JoinViewController.swift in Sources */,
 				277D63BD1D87A30300D43ED4 /* DevMenuController.swift in Sources */,
 				277918041D9767900036DBD4 /* SocketEngine.swift in Sources */,
 				277918171D9767900036DBD4 /* WebSocket.swift in Sources */,
