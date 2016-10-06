@@ -44,6 +44,37 @@ class CoreDataHelper: NSObject {
         return aFetchedResultController
     }
     
+    static func getAllConversation() -> Array<Message> {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+        let entity = NSEntityDescription.entity(forEntityName: "Message", in: shared._managedContext)
+        fetchRequest.entity = entity
+        
+        let sort = NSSortDescriptor(key: "timestamp", ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        
+        var sortedMessageMap:Dictionary<String, Message> = Dictionary<String, Message>()
+        do {
+            let result = try shared._managedContext.fetch(fetchRequest) as! [Message]
+            if (result.count > 0) {
+                for message in result {
+                    if (message.address != nil) {
+                        let prevMessage = sortedMessageMap[message.address!];
+                        if (prevMessage == nil
+                            || prevMessage!.timestamp!.compare(message.timestamp! as Date) == ComparisonResult.orderedAscending) {
+                            sortedMessageMap[message.address!] = message
+                        }
+                    }
+                }
+            }
+            
+            return sortedMessageMap.map({return $1});
+        } catch {
+            
+        }
+        
+        return Array<Message>()
+    }
+    
     //TODO Grouping 해야함
     static func getConversationList() -> NSFetchedResultsController<Message> {
         let fetchRequest = NSFetchRequest<Message>()

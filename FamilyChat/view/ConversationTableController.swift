@@ -13,16 +13,10 @@ class ConversationTableController: BaseUIViewController, UITableViewDelegate, UI
     
     @IBOutlet weak var tableView:UITableView!
     let cellId : String! = "conversationcell";
-    var conversationList : NSFetchedResultsController<Message>?
+    var conversationList : Array<Message>?
     
     fileprivate func loadConversationList() {
-        self.conversationList = CoreDataHelper.getConversationList()
-
-        do {
-            try conversationList?.performFetch()
-        } catch{
-            abort()
-        }
+        self.conversationList = CoreDataHelper.getAllConversation()
         self.tableView.reloadData()
     }
     
@@ -51,23 +45,23 @@ class ConversationTableController: BaseUIViewController, UITableViewDelegate, UI
     // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        let count = self.conversationList?.sections?.count
-        return count!
+        let count = self.conversationList?.count ?? 0
+        return count > 0 ? 1 : 0
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.conversationList?.sections![section]
-        return sectionInfo?.numberOfObjects ?? 0
+        let count = self.conversationList?.count ?? 0
+        return count
     }
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let message = self.conversationList?.object(at: indexPath)
+        let message = self.conversationList?[indexPath.row]
         
         let cell:ConversationCell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! ConversationCell
         
-        cell.addressLabel.text = message?.value(forKey: "address") as? String
-        cell.detailTextLabel?.text = message?.value(forKey: "body") as? String
+        cell.addressLabel.text = message?.address
+        cell.bodyText?.text = message?.body
         return cell
     }
     
@@ -106,7 +100,7 @@ class ConversationTableController: BaseUIViewController, UITableViewDelegate, UI
         // Pass the selected object to the new view controller.
         let messageViewController:MessagesTableViewController = segue.destination as! MessagesTableViewController
         if let indexPath = self.tableView.indexPathForSelectedRow {
-            if let message = self.conversationList?.object(at: indexPath) {
+            if let message = self.conversationList?[indexPath.row] {
                 messageViewController.conversation = CoversationModel(address:message.value(forKey: "address") as! String,
                     timestamp: Date(),
                     body: "")
