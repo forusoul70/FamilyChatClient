@@ -16,7 +16,9 @@ class ConversationTableController: BaseUIViewController, UITableViewDelegate, UI
     var conversationList : Array<Message>?
     
     fileprivate func loadConversationList() {
-        self.conversationList = CoreDataHelper.getAllConversation()
+        self.conversationList = CoreDataHelper.getConversationList()
+//        self.conversationList = CoreDataHelper.getAllConversation()
+        
         self.tableView.reloadData()
     }
     

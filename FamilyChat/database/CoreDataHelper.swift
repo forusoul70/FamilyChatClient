@@ -75,9 +75,38 @@ class CoreDataHelper: NSObject {
         return Array<Message>()
     }
     
-    //TODO Grouping 해야함
-    static func getConversationList() -> NSFetchedResultsController<Message> {
-        let fetchRequest = NSFetchRequest<Message>()
+    static func getMessageByTimestampList(_ timestampList:Array<Date>) -> Array<Message> {
+        let fetchRequest = NSFetchRequest<NSManagedObject>()
+        let entity = NSEntityDescription.entity(forEntityName: "Message", in: shared._managedContext)
+        fetchRequest.entity = entity
+        
+        // sort 
+        let sort:NSSortDescriptor = NSSortDescriptor(key: "timestamp", ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        
+        // selection
+        var selection = ""
+        for i in 0...(timestampList.count-1) {
+            if (i > 0) {
+                selection += " || "
+            }
+            let partSelection = "timestamp= CAST(\(timestampList[i].timeIntervalSinceReferenceDate),  \"NSDate\")"            
+            selection += partSelection
+        }
+
+        fetchRequest.predicate = NSPredicate(format: selection)
+        do {
+            let result = try shared._managedContext.fetch(fetchRequest)
+            return result as! [Message]
+        } catch {
+            
+        }
+        
+        return Array<Message>()
+    }
+    
+    static func getConversationList() -> Array<Message> {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         // Edit the entity name as appropriate
         let entity = NSEntityDescription.entity(forEntityName: "Message", in: shared._managedContext)
         fetchRequest.entity = entity
@@ -87,25 +116,31 @@ class CoreDataHelper: NSObject {
         fetchRequest.sortDescriptors = [sort]
         
         // group by
-        var expressionDescriptions = [AnyObject]()
-        var expressionDescription:NSExpressionDescription
-        expressionDescriptions.append("address" as AnyObject)
-        
-        expressionDescription = NSExpressionDescription()
-        expressionDescription.name = "body"
+        var expressionDescriptions = Array<AnyObject>()
+        let expressionDescription:NSExpressionDescription = NSExpressionDescription()
+        expressionDescription.name = "timestamp"
         expressionDescription.expression = NSExpression(format: "@max.timestamp")
-        expressionDescription.expressionResultType = .integer32AttributeType
         expressionDescriptions.append(expressionDescription)
         
         fetchRequest.propertiesToFetch = expressionDescriptions
         fetchRequest.propertiesToGroupBy = ["address"]
         fetchRequest.resultType = NSFetchRequestResultType.dictionaryResultType
         
-        // Edit the sort key as appropriate
-        let aFetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: shared._managedContext, sectionNameKeyPath: nil, cacheName: "getConversationList_\(shared.getCurrentUserId())")
+        do {
+            var timestampList = [Date]()
+            let queryResult = try shared._managedContext.fetch(fetchRequest) as! [Dictionary<String, AnyObject>]
+            if (queryResult.count != 0) {
+                for value in queryResult {
+                    let dateDouble = Double(value[expressionDescription.name] as! String)
+                    timestampList.append(Date(timeIntervalSinceReferenceDate: dateDouble!))
+                }
+                return getMessageByTimestampList(timestampList)
+            }
+        } catch {
+            
+        }
         
-        return aFetchedResultController
-
+        return [Message]()
     }
     
     static func insertMessage(_ address: String!, body: String!, isSend:Bool) -> Message {
