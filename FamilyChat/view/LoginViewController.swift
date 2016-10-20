@@ -14,8 +14,8 @@ class LoginViewController: BaseUIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var checkPassswordInfo: UILabel!
     
-    fileprivate let loginSegueId = "loginSegue"
-    fileprivate let joinSegueId = "joinSegue"
+    private let loginSegueId = "loginSegue"
+    private let joinSegueId = "joinSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -164,6 +164,69 @@ class CoreDataHelper: NSObject {
         return newMessage
     }
     
+    static func insertNewFriendList(friendList:Array<Friends>) -> Void {
+        if (friendList.count == 0) {
+            print("deleteAllFriendAndInsertNew(), input friend list is empty");
+            return
+        }
+        
+        let currentUserId = shared.getCurrentUserId();
+        if (ValidationUtils.isValid(currentUserId) == false) {
+            print("deleteAllFriendAndInsertNew(), Failed to get current user id");
+            return
+        }
+        
+        let entity = NSEntityDescription.entity(forEntityName: "Friends", in: shared._managedContext)!
+        
+        // first delete all
+        let request = NSFetchRequest<Friends>();
+        request.entity = entity
+        request.predicate = NSPredicate(format: "friendWith = %@", currentUserId)
+        do {
+            let prevFriendList:Array<Friends> = try shared._managedContext.fetch(request)
+            for prevFriend in prevFriendList {
+                shared._managedContext.delete(prevFriend)
+            }
+        } catch {
+            print("Failed to delete previous friend list");
+            return
+        }
+        
+        // insert new
+        for friend in friendList {
+            let newFriend:Friends = NSEntityDescription.insertNewObject(forEntityName: entity.name!, into: shared._managedContext) as! Friends
+            
+            newFriend.account = friend.account
+            newFriend.friendWith = currentUserId;
+        }
+    }
+    
+    static func getAllFriendList() -> Array<Friends> {
+        let currentUserId = shared.getCurrentUserId();
+        if (ValidationUtils.isValid(currentUserId) == false) {
+            print("Failed to get current user id")
+            return Array<Friends>();
+        }
+        
+        // Request
+        let request = NSFetchRequest<Friends>();
+        request.entity = NSEntityDescription.entity(forEntityName: "Friends", in: shared._managedContext)
+        
+        // predicate
+        request.predicate = NSPredicate(format: "isFriend = %@", NSNumber(booleanLiteral: true))
+        
+        // sort
+        let sort : NSSortDescriptor = NSSortDescriptor(key: "Accounts", ascending: true)
+        request.sortDescriptors = [sort]
+        
+        do {
+            return try shared._managedContext.fetch(request)
+        } catch {
+            return Array<Friends>();
+        }
+    }
+    
+    
     func getCurrentUserId() -> String {
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileURL = documentsURL.appendingPathComponent("preference").path

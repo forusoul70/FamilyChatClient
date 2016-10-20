@@ -15,6 +15,12 @@ class ConversationTableController: BaseUIViewController, UITableViewDelegate, UI
     let cellId : String! = "conversationcell";
     var conversationList : Array<Message>?
     
+    private let addContactSequeId = "addContact"
+    
+    @IBAction func onAddContactButtonClicked(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: self.addContactSequeId, sender: sender)
+    }
+    
     fileprivate func loadConversationList() {
         self.conversationList = CoreDataHelper.getConversationList()
 //        self.conversationList = CoreDataHelper.getAllConversation()
@@ -100,14 +106,18 @@ class ConversationTableController: BaseUIViewController, UITableViewDelegate, UI
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        let messageViewController:MessagesTableViewController = segue.destination as! MessagesTableViewController
-        if let indexPath = self.tableView.indexPathForSelectedRow {
-            if let message = self.conversationList?[indexPath.row] {
-                messageViewController.conversation = CoversationModel(address:message.value(forKey: "address") as! String,
-                    timestamp: Date(),
-                    body: "")
+        
+        if (segue.identifier == self.addContactSequeId) {
+            // do nothing
+        } else {
+            let messageViewController:MessagesTableViewController = segue.destination as! MessagesTableViewController
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                if let message = self.conversationList?[indexPath.row] {
+                    messageViewController.conversation =
+                        CoversationModel(address:message.address ?? "",
+                                         timestamp: message.timestamp as! Date, body: message.body ?? "")
+                }
             }
-            
         }
     }
 }

@@ -150,8 +150,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Hi-0Q-kox">
-                                <frame key="frameInset" minX="70" minY="114" width="243" height="90"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Hi-0Q-kox">
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJK-0l-eLs">
                                         <subviews>
@@ -329,6 +328,55 @@
             </objects>
             <point key="canvasLocation" x="-63" y="637"/>
         </scene>
+        <!--Add Contact View Controller-->
+        <scene sceneID="yMA-be-CBI">
+            <objects>
+                <viewController id="IHu-wW-pld" customClass="AddContactViewController" customModule="FamilyChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6zI-OY-rVD"/>
+                        <viewControllerLayoutGuide type="bottom" id="GYQ-FC-J3g"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xBQ-Am-FrM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Z11-jv-DcO">
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please insert your friend's account" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Odv-pS-e66">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Des-pf-6P0"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGE-ZE-BcF">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="fqv-PB-IfK"/>
+                                        </constraints>
+                                        <state key="normal" title="추가"/>
+                                        <connections>
+                                            <action selector="onSearchButtonClicked:" destination="IHu-wW-pld" eventType="touchUpInside" id="Okk-Cv-eVH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Z11-jv-DcO" secondAttribute="trailing" id="JTC-RA-XGB"/>
+                            <constraint firstItem="Z11-jv-DcO" firstAttribute="leading" secondItem="xBQ-Am-FrM" secondAttribute="leading" id="L9D-ZX-iml"/>
+                            <constraint firstItem="Z11-jv-DcO" firstAttribute="top" secondItem="6zI-OY-rVD" secondAttribute="bottom" id="aws-Z2-f8a"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="accoutTextView" destination="Odv-pS-e66" id="uZS-Pg-jNq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XE2-iM-wbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="685.60000000000002" y="636.4317841079461"/>
+        </scene>
         <!--Messages Table View Controller-->
         <scene sceneID="lDS-8s-6sk">
             <objects>
@@ -350,7 +398,7 @@
                                                 <rect key="frame" x="0.0" y="92" width="375" height="102"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dSN-ZE-Vb3" id="oBW-pf-Afu">
-                                                    <frame key="frameInset" width="375" height="101"/>
+                                                    <frame key="frameInset" width="375" height="101.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rel-c1-C7u">
@@ -484,7 +532,7 @@
                                         <rect key="frame" x="0.0" y="92" width="560" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n9t-qS-unQ" id="F5q-mO-yED">
-                                            <frame key="frameInset" width="560" height="89"/>
+                                            <frame key="frameInset" width="560" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUA-rL-2cM">
@@ -548,25 +596,39 @@
                                     <outlet property="delegate" destination="KyK-du-4mr" id="TGn-f0-Jud"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xj-Sj-t8V">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="F9J-7d-gKJ"/>
+                                    <constraint firstAttribute="width" constant="64" id="IQ5-l0-dc5"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="plus_button.png"/>
+                                <connections>
+                                    <action selector="onAddContactButtonClicked:" destination="KyK-du-4mr" eventType="touchUpInside" id="pca-IF-uKB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="OYD-Hc-Q4J" firstAttribute="leading" secondItem="OPY-yT-19i" secondAttribute="leadingMargin" id="2Je-Ao-rEO"/>
                             <constraint firstItem="OYD-Hc-Q4J" firstAttribute="top" secondItem="OPY-yT-19i" secondAttribute="topMargin" id="92X-pC-YFn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3xj-Sj-t8V" secondAttribute="trailing" constant="10" id="KsO-Oo-wSA"/>
+                            <constraint firstItem="SUz-cd-z5g" firstAttribute="top" secondItem="3xj-Sj-t8V" secondAttribute="bottom" constant="10" id="jDn-f8-NbD"/>
                             <constraint firstItem="OYD-Hc-Q4J" firstAttribute="trailing" secondItem="OPY-yT-19i" secondAttribute="trailingMargin" id="jN1-FY-OTN"/>
                             <constraint firstItem="SUz-cd-z5g" firstAttribute="top" secondItem="OYD-Hc-Q4J" secondAttribute="bottom" id="sRt-gu-jfH"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="OYD-Hc-Q4J" id="mAA-nk-hX4"/>
+                        <segue destination="IHu-wW-pld" kind="show" identifier="addContact" id="aTo-om-Jba"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6a-07-igS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="686" y="-124"/>
+            <point key="canvasLocation" x="685.50724637681162" y="-124.72826086956523"/>
         </scene>
     </scenes>
     <resources>
         <image name="default_profile.jpeg" width="204" height="204"/>
+        <image name="plus_button.png" width="512" height="512"/>
     </resources>
 </document>

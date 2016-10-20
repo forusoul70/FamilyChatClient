@@ -51,6 +51,8 @@
 		27B08F191D95091A00FA096D /* BaseUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B08F181D95091A00FA096D /* BaseUIViewController.swift */; };
 		27C1C9311D92B6EC00D0BB72 /* MessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C1C9301D92B6EC00D0BB72 /* MessageViewCell.swift */; };
 		27C378A51D9027990023789F /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C378A41D9027990023789F /* ConversationCell.swift */; };
+		27CABAD21DAF32650072AE38 /* plus_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 27CABAD11DAF32650072AE38 /* plus_button.png */; };
+		27CABAD41DAF35080072AE38 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CABAD31DAF35080072AE38 /* AddContactViewController.swift */; };
 		27EEAB4C1D9EC54E0001F7B3 /* BroadcastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEAB4B1D9EC54E0001F7B3 /* BroadcastManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +103,8 @@
 		27B08F181D95091A00FA096D /* BaseUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseUIViewController.swift; path = view/BaseUIViewController.swift; sourceTree = "<group>"; };
 		27C1C9301D92B6EC00D0BB72 /* MessageViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageViewCell.swift; path = view/MessageViewCell.swift; sourceTree = "<group>"; };
 		27C378A41D9027990023789F /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationCell.swift; path = view/ConversationCell.swift; sourceTree = "<group>"; };
+		27CABAD11DAF32650072AE38 /* plus_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plus_button.png; path = resource/image/plus_button.png; sourceTree = "<group>"; };
+		27CABAD31DAF35080072AE38 /* AddContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddContactViewController.swift; path = view/AddContactViewController.swift; sourceTree = "<group>"; };
 		27EEAB4B1D9EC54E0001F7B3 /* BroadcastManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BroadcastManager.swift; path = engine/BroadcastManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -227,6 +231,7 @@
 				277D63BC1D87A30300D43ED4 /* DevMenuController.swift */,
 				279BD3AB1D8BA45A00700A64 /* MessagesTableViewController.swift */,
 				27B08F181D95091A00FA096D /* BaseUIViewController.swift */,
+				27CABAD31DAF35080072AE38 /* AddContactViewController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 		27C378A71D9028DE0023789F /* image */ = {
 			isa = PBXGroup;
 			children = (
+				27CABAD11DAF32650072AE38 /* plus_button.png */,
 				279C86CD1D94C5B700B9CF7F /* default_profile.jpeg */,
 			);
 			name = image;
@@ -325,6 +331,7 @@
 			files = (
 				27A8025F1D83E4D50003358A /* LaunchScreen.storyboard in Resources */,
 				279C86CE1D94C5B700B9CF7F /* default_profile.jpeg in Resources */,
+				27CABAD21DAF32650072AE38 /* plus_button.png in Resources */,
 				27A8025C1D83E4D50003358A /* Assets.xcassets in Resources */,
 				27A802571D83E4D50003358A /* Main.storyboard in Resources */,
 			);
@@ -346,6 +353,7 @@
 				277918031D9767900036DBD4 /* SocketClientManager.swift in Sources */,
 				27EEAB4C1D9EC54E0001F7B3 /* BroadcastManager.swift in Sources */,
 				277918071D9767900036DBD4 /* SocketEnginePollable.swift in Sources */,
+				27CABAD41DAF35080072AE38 /* AddContactViewController.swift in Sources */,
 				277918051D9767900036DBD4 /* SocketEngineClient.swift in Sources */,
 				277918131D9767900036DBD4 /* SocketParsable.swift in Sources */,
 				272A42901D8500640068FEF0 /* CoreDataHelper.swift in Sources */,

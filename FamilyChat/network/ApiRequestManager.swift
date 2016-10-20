@@ -13,10 +13,11 @@ private let _sharedApiRequestManger = ApiRequestManager()
 class ApiRequestManager: NSObject {
     
 //    private let SERVER_URL = "https://com-sanghwa-familychat.herokuapp.com/"
-    fileprivate let SERVER_URL = "http://localhost:5000/"
+    private let SERVER_URL = "http://localhost:5000/"
     
-    fileprivate let API_LOGIN = "membership/login"
-    fileprivate let API_JOIN = "membership/createId"
+    private let API_LOGIN = "membership/login"
+    private let API_JOIN = "membership/createId"
+    private let API_ADD_FRIEND = "membership/addContactId"
 
     class var shared : ApiRequestManager {
         return _sharedApiRequestManger
@@ -87,6 +88,29 @@ class ApiRequestManager: NSObject {
         let body: Dictionary<String, String> = ["id": id!, "password": pw!]
         let encodedBody = Utils.convertJsonStringWithDictionary(body)
         self.requestApi(API_JOIN, body: encodedBody) { (resCode, responseBody) in
+            if (resCode == 200) {
+                completeHandler(true, responseBody)
+            } else {
+                completeHandler(false, nil)
+            }
+        }
+    }
+    
+    func requestAddFriendAccount(account:String?, completeHandler: @escaping (Bool, [String: AnyObject]?) -> Void) {
+        let curretUserId = CoreDataHelper.shared.getCurrentUserId()
+        if (ValidationUtils.isValid(curretUserId) == false) {
+            print("Failed to get current user id is empty")
+            return
+        }
+        
+        if (ValidationUtils.isValid(account) == false) {
+            print("Input friend account is empty");
+            return
+        }
+        
+        let body:Dictionary<String,String> = ["id" : curretUserId, "friend" : account!]
+        let encoedBody = Utils.convertJsonStringWithDictionary(body)
+        self.requestApi(API_ADD_FRIEND, body: encoedBody) { (resCode, responseBody) in
             if (resCode == 200) {
                 completeHandler(true, responseBody)
             } else {
