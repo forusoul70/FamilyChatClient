@@ -49,6 +49,7 @@
 		27AD29B61DA3EAE800431682 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AD29B51DA3EAE800431682 /* JoinViewController.swift */; };
 		27B08F171D94E50000FA096D /* ApiRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B08F161D94E50000FA096D /* ApiRequestManager.swift */; };
 		27B08F191D95091A00FA096D /* BaseUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B08F181D95091A00FA096D /* BaseUIViewController.swift */; };
+		27C18FD01DBE61C8005221A4 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C18FCF1DBE61C8005221A4 /* MainTabBarController.swift */; };
 		27C1C9311D92B6EC00D0BB72 /* MessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C1C9301D92B6EC00D0BB72 /* MessageViewCell.swift */; };
 		27C378A51D9027990023789F /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C378A41D9027990023789F /* ConversationCell.swift */; };
 		27CABAD21DAF32650072AE38 /* plus_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 27CABAD11DAF32650072AE38 /* plus_button.png */; };
@@ -101,6 +102,7 @@
 		27AD29B51DA3EAE800431682 /* JoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JoinViewController.swift; path = view/JoinViewController.swift; sourceTree = "<group>"; };
 		27B08F161D94E50000FA096D /* ApiRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiRequestManager.swift; path = network/ApiRequestManager.swift; sourceTree = "<group>"; };
 		27B08F181D95091A00FA096D /* BaseUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseUIViewController.swift; path = view/BaseUIViewController.swift; sourceTree = "<group>"; };
+		27C18FCF1DBE61C8005221A4 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabBarController.swift; path = view/MainTabBarController.swift; sourceTree = "<group>"; };
 		27C1C9301D92B6EC00D0BB72 /* MessageViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageViewCell.swift; path = view/MessageViewCell.swift; sourceTree = "<group>"; };
 		27C378A41D9027990023789F /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationCell.swift; path = view/ConversationCell.swift; sourceTree = "<group>"; };
 		27CABAD11DAF32650072AE38 /* plus_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plus_button.png; path = resource/image/plus_button.png; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				279BD3AB1D8BA45A00700A64 /* MessagesTableViewController.swift */,
 				27B08F181D95091A00FA096D /* BaseUIViewController.swift */,
 				27CABAD31DAF35080072AE38 /* AddContactViewController.swift */,
+				27C18FCF1DBE61C8005221A4 /* MainTabBarController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				277918041D9767900036DBD4 /* SocketEngine.swift in Sources */,
 				277918171D9767900036DBD4 /* WebSocket.swift in Sources */,
 				2779180F1D9767900036DBD4 /* SocketIOClientSpec.swift in Sources */,
+				27C18FD01DBE61C8005221A4 /* MainTabBarController.swift in Sources */,
 				277918111D9767900036DBD4 /* SocketLogger.swift in Sources */,
 				2779180E1D9767900036DBD4 /* SocketIOClientOption.swift in Sources */,
 				277918121D9767900036DBD4 /* SocketPacket.swift in Sources */,

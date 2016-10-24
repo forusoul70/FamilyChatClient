@@ -130,8 +130,8 @@
                         <outlet property="checkPassswordInfo" destination="pYA-Ad-pOH" id="GxC-1d-00t"/>
                         <outlet property="idTextField" destination="4Sb-sq-1Rk" id="UPv-nV-LoF"/>
                         <outlet property="passwordTextField" destination="oH4-yS-J5m" id="WFz-A3-5pQ"/>
-                        <segue destination="KyK-du-4mr" kind="show" identifier="loginSegue" id="w9U-4G-mzb"/>
                         <segue destination="8hb-19-Wso" kind="show" identifier="joinSegue" id="ZFP-ds-gRX"/>
+                        <segue destination="xZp-yW-aHP" kind="show" identifier="loginSegue" id="ds9-Xy-pxZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lMQ-8n-zgA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -328,6 +328,25 @@
             </objects>
             <point key="canvasLocation" x="-63" y="637"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="HEs-tV-PD5">
+            <objects>
+                <viewController id="9Ob-c9-alC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wbP-f6-iNe"/>
+                        <viewControllerLayoutGuide type="bottom" id="9CL-lK-5b5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cyH-xe-LCC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="CDO-aN-JHi"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AdJ-RK-84c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1876" y="795"/>
+        </scene>
         <!--Add Contact View Controller-->
         <scene sceneID="yMA-be-CBI">
             <objects>
@@ -375,7 +394,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XE2-iM-wbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="685.60000000000002" y="636.4317841079461"/>
+            <point key="canvasLocation" x="2884" y="193"/>
+        </scene>
+        <!--Main Tab Bar Controller-->
+        <scene sceneID="zJS-nl-lEA">
+            <objects>
+                <tabBarController id="xZp-yW-aHP" customClass="MainTabBarController" customModule="FamilyChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="APK-Cr-Syd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="9Ob-c9-alC" kind="relationship" relationship="viewControllers" id="Nys-vF-W5X"/>
+                        <segue destination="KyK-du-4mr" kind="relationship" relationship="viewControllers" id="jHV-YC-TKK"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Di0-Wl-VTM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="834" y="-125"/>
         </scene>
         <!--Messages Table View Controller-->
         <scene sceneID="lDS-8s-6sk">
@@ -510,9 +547,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kjh-7E-PLo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1427" y="-124"/>
+            <point key="canvasLocation" x="2884" y="-522"/>
         </scene>
-        <!--Conversation Table Controller-->
+        <!--Item-->
         <scene sceneID="09e-Iw-aU3">
             <objects>
                 <viewController id="KyK-du-4mr" customClass="ConversationTableController" customModule="FamilyChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -617,6 +654,7 @@
                             <constraint firstItem="SUz-cd-z5g" firstAttribute="top" secondItem="OYD-Hc-Q4J" secondAttribute="bottom" id="sRt-gu-jfH"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="W7c-TR-O5x"/>
                     <connections>
                         <outlet property="tableView" destination="OYD-Hc-Q4J" id="mAA-nk-hX4"/>
                         <segue destination="IHu-wW-pld" kind="show" identifier="addContact" id="aTo-om-Jba"/>
@@ -624,7 +662,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6a-07-igS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="685.50724637681162" y="-124.72826086956523"/>
+            <point key="canvasLocation" x="1876" y="-125"/>
         </scene>
     </scenes>
     <resources>
