@@ -52,6 +52,8 @@
 		27C18FD01DBE61C8005221A4 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C18FCF1DBE61C8005221A4 /* MainTabBarController.swift */; };
 		27C1C9311D92B6EC00D0BB72 /* MessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C1C9301D92B6EC00D0BB72 /* MessageViewCell.swift */; };
 		27C378A51D9027990023789F /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C378A41D9027990023789F /* ConversationCell.swift */; };
+		27C5C2C51DC030FB0024C20F /* FriendListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C5C2C41DC030FB0024C20F /* FriendListController.swift */; };
+		27C5C2C71DC033370024C20F /* FriendListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C5C2C61DC033370024C20F /* FriendListCell.swift */; };
 		27CABAD21DAF32650072AE38 /* plus_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 27CABAD11DAF32650072AE38 /* plus_button.png */; };
 		27CABAD41DAF35080072AE38 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CABAD31DAF35080072AE38 /* AddContactViewController.swift */; };
 		27EEAB4C1D9EC54E0001F7B3 /* BroadcastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EEAB4B1D9EC54E0001F7B3 /* BroadcastManager.swift */; };
@@ -105,6 +107,8 @@
 		27C18FCF1DBE61C8005221A4 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabBarController.swift; path = view/MainTabBarController.swift; sourceTree = "<group>"; };
 		27C1C9301D92B6EC00D0BB72 /* MessageViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageViewCell.swift; path = view/MessageViewCell.swift; sourceTree = "<group>"; };
 		27C378A41D9027990023789F /* ConversationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConversationCell.swift; path = view/ConversationCell.swift; sourceTree = "<group>"; };
+		27C5C2C41DC030FB0024C20F /* FriendListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendListController.swift; path = view/FriendListController.swift; sourceTree = "<group>"; };
+		27C5C2C61DC033370024C20F /* FriendListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendListCell.swift; path = view/FriendListCell.swift; sourceTree = "<group>"; };
 		27CABAD11DAF32650072AE38 /* plus_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plus_button.png; path = resource/image/plus_button.png; sourceTree = "<group>"; };
 		27CABAD31DAF35080072AE38 /* AddContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddContactViewController.swift; path = view/AddContactViewController.swift; sourceTree = "<group>"; };
 		27EEAB4B1D9EC54E0001F7B3 /* BroadcastManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BroadcastManager.swift; path = engine/BroadcastManager.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 			children = (
 				27C1C9301D92B6EC00D0BB72 /* MessageViewCell.swift */,
 				27C378A41D9027990023789F /* ConversationCell.swift */,
+				27C5C2C61DC033370024C20F /* FriendListCell.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 				27B08F181D95091A00FA096D /* BaseUIViewController.swift */,
 				27CABAD31DAF35080072AE38 /* AddContactViewController.swift */,
 				27C18FCF1DBE61C8005221A4 /* MainTabBarController.swift */,
+				27C5C2C41DC030FB0024C20F /* FriendListController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -364,6 +370,7 @@
 				277D63BD1D87A30300D43ED4 /* DevMenuController.swift in Sources */,
 				277918041D9767900036DBD4 /* SocketEngine.swift in Sources */,
 				277918171D9767900036DBD4 /* WebSocket.swift in Sources */,
+				27C5C2C51DC030FB0024C20F /* FriendListController.swift in Sources */,
 				2779180F1D9767900036DBD4 /* SocketIOClientSpec.swift in Sources */,
 				27C18FD01DBE61C8005221A4 /* MainTabBarController.swift in Sources */,
 				277918111D9767900036DBD4 /* SocketLogger.swift in Sources */,
@@ -383,6 +390,7 @@
 				2779180D1D9767900036DBD4 /* SocketIOClientConfiguration.swift in Sources */,
 				277D63C01D87A57300D43ED4 /* ValidationUtils.swift in Sources */,
 				277918141D9767900036DBD4 /* SocketStringReader.swift in Sources */,
+				27C5C2C71DC033370024C20F /* FriendListCell.swift in Sources */,
 				2779180B1D9767900036DBD4 /* SocketExtensions.swift in Sources */,
 				277918191D976A320036DBD4 /* SocketIOManager.swift in Sources */,
 				277918001D9767900036DBD4 /* SocketAckEmitter.swift in Sources */,

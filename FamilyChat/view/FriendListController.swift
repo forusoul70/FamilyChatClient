@@ -1,30 +1,27 @@
-
-//  ConversationTableController.swift
+//
+//  FriendListController.swift
 //  FamilyChat
 //
-//  Created by 이상화 on 2016. 9. 10..
+//  Created by 이상화 on 2016. 10. 26..
 //  Copyright © 2016년 lee. All rights reserved.
 //
 
 import UIKit
-import CoreData
 
-class ConversationTableController: BaseUIViewController, UITableViewDelegate, UITableViewDataSource {
+class FriendListController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var tableView:UITableView!
-    let cellId : String! = "conversationcell";
-    var conversationList : Array<Message>?
+    private static let cellId : String! = "FriendListCell";
+    @IBOutlet weak var tableView: UITableView!
+    private var friendList:Array<Friends> = Array<Friends>()
     
-    private let addContactSequeId = "addContact"
-    
-    @IBAction func onAddContactButtonClicked(_ sender: AnyObject) {
-        self.performSegue(withIdentifier: self.addContactSequeId, sender: sender)
-    }
-    
-    fileprivate func loadConversationList() {
+    func loadFrinedList() -> Void {
         DispatchQueue.global().async {
-            self.conversationList = CoreDataHelper.getConversationList()
+            let loadedList = CoreDataHelper.getAllFriendList()
             DispatchQueue.main.async {
+                self.friendList.removeAll()
+                if (loadedList.count > 0) {
+                    self.friendList.append(contentsOf: loadedList)
+                }
                 self.tableView.reloadData()
             }
         }
@@ -33,43 +30,36 @@ class ConversationTableController: BaseUIViewController, UITableViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        // Do any additional setup after loading the view.
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
         
-        loadConversationList()
-        BroadcastManager.shared.addListener(eventName: "insertMessage") {
-            self.loadConversationList()
-        }
+        loadFrinedList()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        let count = self.conversationList?.count ?? 0
+        let count = self.friendList.count
         return count > 0 ? 1 : 0
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = self.conversationList?.count ?? 0
+        let count = self.friendList.count
         return count
     }
-
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let message = self.conversationList?[indexPath.row]
+        let friend = self.friendList[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: FriendListController.cellId, for: indexPath) as! FriendListCell
+        cell.profileName.text = friend.account
         
-        let cell:ConversationCell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath) as! ConversationCell
-        
-        cell.addressLabel.text = message?.address
-        cell.bodyText?.text = message?.body
         return cell
     }
     
@@ -78,7 +68,7 @@ class ConversationTableController: BaseUIViewController, UITableViewDelegate, UI
         // Return false if you do not want the specified item to be editable.
         return true
     }
-
+    
     // Override to support editing the table view.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -86,38 +76,28 @@ class ConversationTableController: BaseUIViewController, UITableViewDelegate, UI
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-
+    
     // Override to support rearranging the table view.
     func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to toIndexPath: IndexPath) {
-
+        
     }
-
+    
     // Override to support conditional rearranging of the table view.
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
         return true
     }
 
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        
-        if (segue.identifier == self.addContactSequeId) {
-            // do nothing
-        } else {
-            let messageViewController:MessagesTableViewController = segue.destination as! MessagesTableViewController
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                if let message = self.conversationList?[indexPath.row] {
-                    messageViewController.conversation =
-                        CoversationModel(address:message.address ?? "",
-                                         timestamp: message.timestamp as! Date, body: message.body ?? "")
-                }
-            }
-        }
     }
+    */
+
 }

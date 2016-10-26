@@ -47,6 +47,13 @@ class LoginViewController: BaseUIViewController {
             
             if (result) {
                 CoreDataHelper.shared.setAccountId(id) // save current user id
+                
+                // friend list
+                let friendList = body?["friendList"] as? Array<String> ?? nil
+                if (friendList != nil) {
+                    CoreDataHelper.insertNewFriendList(friendList: friendList!)
+                }
+                
                 DispatchQueue.main.async {
                     self.hideProgress()
                     self.performSegue(withIdentifier: self.loginSegueId, sender: sender)

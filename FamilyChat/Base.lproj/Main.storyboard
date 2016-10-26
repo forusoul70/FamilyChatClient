@@ -331,7 +331,7 @@
         <!--Item-->
         <scene sceneID="HEs-tV-PD5">
             <objects>
-                <viewController id="9Ob-c9-alC" sceneMemberID="viewController">
+                <viewController id="9Ob-c9-alC" customClass="FriendListController" customModule="FamilyChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wbP-f6-iNe"/>
                         <viewControllerLayoutGuide type="bottom" id="9CL-lK-5b5"/>
@@ -339,13 +339,66 @@
                     <view key="view" contentMode="scaleToFill" id="cyH-xe-LCC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="37o-3J-cdo">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendListCell" rowHeight="55" id="VzY-ML-xPO" customClass="FriendListCell" customModule="FamilyChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="375" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VzY-ML-xPO" id="Rrn-68-LXe">
+                                            <frame key="frameInset" width="375" height="54"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7hX-f5-pLr">
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_profile.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="A12-ce-Oji">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="X7y-TF-Era"/>
+                                                                <constraint firstAttribute="width" constant="50" id="y0W-sD-Yo9"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friend" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfQ-b4-FE3">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="QF8-eA-4dJ"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7hX-f5-pLr" firstAttribute="top" secondItem="Rrn-68-LXe" secondAttribute="top" id="Ct1-ii-8nz"/>
+                                                <constraint firstItem="7hX-f5-pLr" firstAttribute="leading" secondItem="Rrn-68-LXe" secondAttribute="leading" id="JU5-ZD-hsU"/>
+                                                <constraint firstAttribute="trailing" secondItem="7hX-f5-pLr" secondAttribute="trailing" id="QGL-C8-EKr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="profileImage" destination="A12-ce-Oji" id="G49-nz-Jqr"/>
+                                            <outlet property="profileName" destination="ZfQ-b4-FE3" id="QBd-JA-Ti2"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="37o-3J-cdo" firstAttribute="top" secondItem="wbP-f6-iNe" secondAttribute="bottom" id="Asy-jX-LLt"/>
+                            <constraint firstItem="37o-3J-cdo" firstAttribute="leading" secondItem="cyH-xe-LCC" secondAttribute="leading" id="ZGn-PM-BXa"/>
+                            <constraint firstItem="9CL-lK-5b5" firstAttribute="top" secondItem="37o-3J-cdo" secondAttribute="bottom" id="acc-ed-rJc"/>
+                            <constraint firstAttribute="trailing" secondItem="37o-3J-cdo" secondAttribute="trailing" id="e41-U9-7rN"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="CDO-aN-JHi"/>
+                    <connections>
+                        <outlet property="tableView" destination="37o-3J-cdo" id="1Lg-zh-fp3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AdJ-RK-84c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1876" y="795"/>
+            <point key="canvasLocation" x="1876" y="794.75262368815595"/>
         </scene>
         <!--Add Contact View Controller-->
         <scene sceneID="yMA-be-CBI">
@@ -435,7 +488,7 @@
                                                 <rect key="frame" x="0.0" y="92" width="375" height="102"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dSN-ZE-Vb3" id="oBW-pf-Afu">
-                                                    <frame key="frameInset" width="375" height="101.5"/>
+                                                    <frame key="frameInset" width="375" height="101"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rel-c1-C7u">
@@ -569,7 +622,7 @@
                                         <rect key="frame" x="0.0" y="92" width="560" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n9t-qS-unQ" id="F5q-mO-yED">
-                                            <frame key="frameInset" width="560" height="89.5"/>
+                                            <frame key="frameInset" width="560" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUA-rL-2cM">

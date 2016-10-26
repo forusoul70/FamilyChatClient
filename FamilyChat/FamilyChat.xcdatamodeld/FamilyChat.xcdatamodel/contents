@@ -11,7 +11,7 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Message" positionX="-36" positionY="54" width="128" height="105"/>
-        <element name="Friends" positionX="-36" positionY="81" width="128" height="75"/>
+        <element name="Friends" positionX="-36" positionY="81" width="128" height="73"/>
+        <element name="Message" positionX="144" positionY="48" width="128" height="105"/>
     </elements>
 </model>

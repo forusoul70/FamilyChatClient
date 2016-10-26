@@ -164,7 +164,7 @@ class CoreDataHelper: NSObject {
         return newMessage
     }
     
-    static func insertNewFriendList(friendList:Array<Friends>) -> Void {
+    static func insertNewFriendList(friendList:Array<String>) -> Void {
         if (friendList.count == 0) {
             print("deleteAllFriendAndInsertNew(), input friend list is empty");
             return
@@ -196,7 +196,7 @@ class CoreDataHelper: NSObject {
         for friend in friendList {
             let newFriend:Friends = NSEntityDescription.insertNewObject(forEntityName: entity.name!, into: shared._managedContext) as! Friends
             
-            newFriend.account = friend.account
+            newFriend.account = friend
             newFriend.friendWith = currentUserId;
         }
     }
@@ -213,10 +213,10 @@ class CoreDataHelper: NSObject {
         request.entity = NSEntityDescription.entity(forEntityName: "Friends", in: shared._managedContext)
         
         // predicate
-        request.predicate = NSPredicate(format: "isFriend = %@", NSNumber(booleanLiteral: true))
+        request.predicate = NSPredicate(format: "friendWith = %@", currentUserId)
         
         // sort
-        let sort : NSSortDescriptor = NSSortDescriptor(key: "Accounts", ascending: true)
+        let sort : NSSortDescriptor = NSSortDescriptor(key: "account", ascending: true)
         request.sortDescriptors = [sort]
         
         do {
