@@ -378,6 +378,7 @@
                                         <connections>
                                             <outlet property="profileImage" destination="A12-ce-Oji" id="G49-nz-Jqr"/>
                                             <outlet property="profileName" destination="ZfQ-b4-FE3" id="QBd-JA-Ti2"/>
+                                            <segue destination="hOv-tb-ZK8" kind="show" id="dbn-fq-CBY"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -398,7 +399,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AdJ-RK-84c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1876" y="794.75262368815595"/>
+            <point key="canvasLocation" x="1876" y="692"/>
         </scene>
         <!--Add Contact View Controller-->
         <scene sceneID="yMA-be-CBI">
@@ -447,7 +448,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XE2-iM-wbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2884" y="193"/>
+            <point key="canvasLocation" x="2764" y="-889"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="zJS-nl-lEA">
@@ -600,7 +601,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kjh-7E-PLo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2884" y="-522"/>
+            <point key="canvasLocation" x="2764" y="-125"/>
         </scene>
         <!--Item-->
         <scene sceneID="09e-Iw-aU3">
@@ -722,4 +723,7 @@
         <image name="default_profile.jpeg" width="204" height="204"/>
         <image name="plus_button.png" width="512" height="512"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="dbn-fq-CBY"/>
+    </inferredMetricsTieBreakers>
 </document>

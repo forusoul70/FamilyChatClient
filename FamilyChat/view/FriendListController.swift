@@ -89,6 +89,20 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
         // Return false if you do not want the item to be re-orderable.
         return true
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+      
+        let messageViewController:MessagesTableViewController = segue.destination as! MessagesTableViewController
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            let friend = self.friendList[indexPath.row]
+            if (ValidationUtils.isValid(friend.account)) {
+                messageViewController.conversation = CoversationModel(address: friend.account!, timestamp: Date(), body: "")
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation
