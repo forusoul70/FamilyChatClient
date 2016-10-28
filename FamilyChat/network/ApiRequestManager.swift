@@ -18,12 +18,13 @@ class ApiRequestManager: NSObject {
     private let API_LOGIN = "membership/login"
     private let API_JOIN = "membership/createId"
     private let API_ADD_FRIEND = "membership/addContactId"
+    private let API_GET_PRORILE_IMAGE = "getProfile/"
 
     class var shared : ApiRequestManager {
         return _sharedApiRequestManger
     }
     
-    fileprivate func requestApi(_ api:String!, body:String!, completeHandler: @escaping (Int?, [String : AnyObject]?) -> Void) {
+    private func requestApi(_ api:String!, body:String!, completeHandler: @escaping (Int?, [String : AnyObject]?) -> Void) {
         let url = URL(string: SERVER_URL + api)
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
@@ -62,6 +63,22 @@ class ApiRequestManager: NSObject {
                 completeHandler(resultCode, nil)
             }
            
+        })
+        task.resume()
+    }
+    
+    private func getResource(_ api:String!, completeHandler: @escaping (Int?, Data?) -> Void) {
+        let url = URL(string: SERVER_URL + api)
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request, completionHandler: {(data, response, error) in
+            let resultCode = (response as! HTTPURLResponse).statusCode
+            if (resultCode == 2000) {
+                completeHandler(resultCode, data)
+            } else {
+                completeHandler(resultCode, nil)
+            }
         })
         task.resume()
     }
@@ -113,6 +130,22 @@ class ApiRequestManager: NSObject {
         self.requestApi(API_ADD_FRIEND, body: encoedBody) { (resCode, responseBody) in
             if (resCode == 200) {
                 completeHandler(true, responseBody)
+            } else {
+                completeHandler(false, nil)
+            }
+        }
+    }
+    
+    func reqeustProfileImage(account:String!, completeHandler: @escaping (Bool, Data?) -> Void) {
+        if (ValidationUtils.isValid(account) == false) {
+            print("reqeustProfileImage(), Inavlid account")
+            return
+        }
+        
+        let api = API_GET_PRORILE_IMAGE + account
+        self.getResource(api) { (resCode, data) in
+            if (resCode == 200) {
+                completeHandler(true, data)
             } else {
                 completeHandler(false, nil)
             }

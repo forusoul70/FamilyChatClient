@@ -17,7 +17,7 @@ class MessagesTableViewController: UIViewController, NSFetchedResultsControllerD
     fileprivate let cellId = "messagecell"
     var conversation:CoversationModel?
     var messageList:NSFetchedResultsController<Message>?
-    fileprivate let sendingMessageQue:OperationQueue = OperationQueue()
+    private let sendingMessageQue:OperationQueue = OperationQueue()
     
     class SendingMessageOperation : Operation {
         let address:String?

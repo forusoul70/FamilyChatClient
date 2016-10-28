@@ -13,10 +13,27 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
     private static let cellId : String! = "FriendListCell";
     @IBOutlet weak var tableView: UITableView!
     private var friendList:Array<Friends> = Array<Friends>()
+    private var profileImageMap:Dictionary<String, UIImage> = Dictionary<String, UIImage>()
     
     func loadFrinedList() -> Void {
         DispatchQueue.global().async {
             let loadedList = CoreDataHelper.getAllFriendList()
+            if (loadedList.count > 0) {
+                // request profile
+                for friend in loadedList {
+                    ApiRequestManager.shared.reqeustProfileImage(account: friend.account) { (resCode, data) in
+                        if (resCode && data != nil) {
+                            let dataDecode = Data(base64Encoded: data!)
+                            let decodedimage = UIImage(data: dataDecode!)
+                            DispatchQueue.main.async {
+                                self.profileImageMap[friend.account!] = decodedimage
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+            
             DispatchQueue.main.async {
                 self.friendList.removeAll()
                 if (loadedList.count > 0) {
@@ -59,6 +76,11 @@ class FriendListController: UIViewController, UITableViewDelegate, UITableViewDa
         let friend = self.friendList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: FriendListController.cellId, for: indexPath) as! FriendListCell
         cell.profileName.text = friend.account
+        
+        let profileImage = self.profileImageMap[friend.account!]
+        if (profileImage != nil) {
+            cell.profileImage.image = profileImage
+        }
         
         return cell
     }
