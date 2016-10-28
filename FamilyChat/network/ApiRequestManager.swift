@@ -74,7 +74,7 @@ class ApiRequestManager: NSObject {
         
         let task = URLSession.shared.dataTask(with: request, completionHandler: {(data, response, error) in
             let resultCode = (response as! HTTPURLResponse).statusCode
-            if (resultCode == 2000) {
+            if (resultCode == 200) {
                 completeHandler(resultCode, data)
             } else {
                 completeHandler(resultCode, nil)
